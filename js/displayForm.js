@@ -79,7 +79,6 @@ function displayProjList()
 
 function populateProjList(data, textStatus, jqXHR)
 {
-	$(".alert").alert();
 	$select = $('#projList');
 	if(textStatus == "success")
 	{
@@ -101,9 +100,6 @@ function populateProjList(data, textStatus, jqXHR)
 function saveInProjAcc(id)
 {
 	//localStorage.setItem('projID',id);
-	$('.alert').addClass('in');
-	$('#progressBar').width("30%");		
-	$('#progressBar').attr("aria-valuenow","30");
 	$.ajax({
 		type:"POST",
 		data: {accountsID:localStorage.getItem("accountsID"),projectID:id},
@@ -111,18 +107,47 @@ function saveInProjAcc(id)
 		url:"php/setAccProj.php",
 		success: function(data,textStatus,jqXHR)
 		{
-			
+			$('#progressBar').width("30%");		
+			$('#progressBar').attr("aria-valuenow","30");
+			var alert = document.createElement("div");
+			alert.className = "alert alert-dismissable alert-success fade";
+			var myBut = document.createElement("button");
+			myBut.setAttribute('type','button');
+			myBut.className = "close";
+			myBut.setAttribute('data-dismiss','alert');
+			myBut.setAttribute('aria-hidden',true);
+			myBut.innerHTML = "&times;";
+
+			alert.appendChild(myBut);
+			alert.innerHTML += "<strong>Success</strong> Project add to user";
+			var pgBar = document.getElementById('prog');
+			var parent = pgBar.parentNode;
+			parent.insertBefore(alert,pgBar);
+
+			alert.className += " in";
 		},
-		error: function()
+		error: function(xhr, ajaxOptions, thrownError)
 		{   //if there is an error append a 'none available' option
-		   
+			var myAlert = document.createElement("div");
+			myAlert.className = "alert alert-dismissable alert-warning fade";
+			var myBut = document.createElement("button");
+			myBut.setAttribute('type','button');
+			myBut.className = "close";
+			myBut.setAttribute('data-dismiss','alert');
+			myBut.setAttribute('aria-hidden',true);
+			myBut.innerHTML = "&times;";
+
+			myAlert.appendChild(myBut);
+			myAlert.innerHTML += "<strong>Error!</strong>  " + _.string.words((xhr.responseText).toString(),"}")[1];
+
+			alert(_.string.words((xhr.responseText).toString(),"}")[0]);
+			
+			var pgBar = document.getElementById('prog');
+			var parent = pgBar.parentNode;
+			parent.insertBefore(myAlert,pgBar);
+
+			myAlert.className += " in";
 		}
 	})
 
 }
-
-$('.close').click(function() {
-
-   $('.alert').removeClass('in');
-
-})
