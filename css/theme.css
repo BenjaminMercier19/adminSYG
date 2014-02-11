@@ -4,6 +4,11 @@ body {
   height: 100%;
 }
 
+html
+{
+	height:100%;
+}
+
 .theme-dropdown .dropdown-menu {
   display: block;
   position: static;
@@ -15,7 +20,25 @@ body {
 }
 
 .theme-fixed-bottom {
-	position: fixed;
   bottom: 15px;
   margin: 5px 0;
+}
+
+.myList
+{
+	max-height: 250px;
+	overflow-y: auto;
+}
+
+.page
+{
+	min-height: 100%;
+	height: auto;
+	margin: 0 auto -60px;
+	padding: 0 0 60px;
+}
+
+#footer
+{
+	height: 60px;
 }
