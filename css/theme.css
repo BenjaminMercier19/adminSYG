@@ -1,0 +1,21 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+  height: 100%;
+}
+
+.theme-dropdown .dropdown-menu {
+  display: block;
+  position: static;
+  margin-bottom: 20px;
+}
+
+.theme-showcase > p > .btn {
+  margin: 5px 0;
+}
+
+.theme-fixed-bottom {
+	position: fixed;
+  bottom: 15px;
+  margin: 5px 0;
+}
