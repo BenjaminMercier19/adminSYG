@@ -40,6 +40,9 @@
       </div>
     </div>
 
+    <div class="sumUp">
+      <h2><span class="glyphicon glyphicon-th-large"></span>Résumé</h2>
+    </div>
 
     <div class="container theme-showcase page" role="main">
       <div class="page-header">
@@ -71,7 +74,7 @@
           <button type="button" class="btn btn-default" onclick="displayProjList()">Choisir un projet existant</button>
         </div>
         <div id='selectProj' class="btn-group hide">
-          <button type="button" class="btn btn-primary">Proj List</button>
+          <button type="button" class="btn btn-primary">Project List</button>
           <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
             <span class="sr-only">User List</span>
             <span class="caret"></span>
@@ -81,9 +84,26 @@
         </div>
       </div>
 
+
+      <div id="step3" class="hide"> 
+        <div class="page-header">
+           <h1>Choisissez le rôle</h1>    
+        </div>
+        <div id='selectRole' class="btn-group">
+          <button type="button" class="btn btn-primary">Role List</button>
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            <span class="sr-only">User role</span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu myList" id="roleList" role="menu">
+            <li><a onClick="setRole(this.id)" id="Validateur">Validateur</a></li>
+            <li><a onClick="setRole(this.id)" id="Prestataire">Prestataire</a></li>
+            <li><a onClick="setRole(this.id)" id="Client">Client</a></li>
+          </ul>
+        </div>
+      </div>
+
     </div>
-
-
 
     <div id="footer">
       <div class="container">
