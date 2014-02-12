@@ -9,6 +9,15 @@ html
 	height:100%;
 }
 
+.alert
+{
+  z-index: 1000;
+  position: absolute;
+  bottom: 0;
+  width: 30%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
 .theme-dropdown .dropdown-menu {
   display: block;
   position: static;
@@ -63,26 +72,28 @@ html
 }
 
 .sumUp:hover span{
-  -webkit-transform: rotate(720deg);
-  -webkit-transform: rotate(720deg);
-  -moz-transform: rotate(720deg);
-  -ms-transform: rotate(720deg);
-  -o-transform: rotate(720deg);
-  transform: rotate(720deg);
+  -webkit-transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
+  transform: rotate(360deg);
   -webkit-transform-origin: 50% 50%;
   -moz-transform-origin: 50% 50%;
   -ms-transform-origin: 50% 50%;
   -o-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
-  -webkit-transition: all 1s;
-  -moz-transition: all 1s;
-  -ms-transition: all 1s;
-  -o-transition: all 1s;
-  transition: all 1s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
 
 }
 
 .sumUp span {
+  padding: 0px 10px;
+  color: white;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
   -ms-transform: rotate(0deg);
@@ -93,9 +104,9 @@ html
   -ms-transform-origin: 50% 50%;
   -o-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
-  -webkit-transition: all 1s;
-  -moz-transition: all 1s;
-  -ms-transition: all 1s;
-  -o-transition: all 1s;
-  transition: all 1s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
 }
