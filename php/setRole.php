@@ -16,8 +16,10 @@ if( $stmt === false ) {
 
 if(sqlsrv_has_rows($stmt)){ 
 	$row = sqlsrv_fetch_array( $stmt);
-	echo json_encode($row);
-	echo "This user has already a configuration for this project: <a>".$row[3]."</a>";
+	$data = array("error" => "Already Exists");
+
+	echo json_encode(array_merge((array)$data, (array)$row));
+	//echo "This user has already a configuration for this project: <a>".$row[3]."</a>";
 }
 else
 {
@@ -31,7 +33,9 @@ else
 	{
 		sqlsrv_next_result($ressource); 
 		sqlsrv_fetch($ressource); 
-		echo json_encode(sqlsrv_get_field($ressource, 0)); 
+		$data = array("Success" => "A configuration file has been created", "id" => sqlsrv_get_field($ressource, 0), "config" => sqlsrv_get_field($ressource, 3));
+		//echo json_encode(sqlsrv_get_field($ressource, 0)); 
+		echo json_encode($data);
 	}
 }
 /*

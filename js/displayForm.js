@@ -1,5 +1,6 @@
 (function(){
 	window.addEventListener('load', onLoadHandler, false);
+
 	localStorage.clear();
 })();
 
@@ -14,8 +15,10 @@ function displayUserForm()
 {
 
 	//lancer le script PHP pour avoir la liste des users
-	$('#selectPeople').show();
+	//TODO loading gif
+	$("#loader").show();
 	$select = $('#myList');
+	
 	$.ajax({
 		type:"POST",
 		dataType:"json",
@@ -27,11 +30,13 @@ function displayUserForm()
 		error: function(){   //if there is an error append a 'none available' option
 		   $select.html('<li><a id="-1">none available</a></li>');
 		}
-	})
+	});
 }
 
 function populateUserList(data, textStatus, jqXHR)
 {
+	$("#loader").hide();
+	$('#selectPeople').show();
 	//alert("proj");
 	$select = $('#myList');
 	if(textStatus == "success")
@@ -44,7 +49,7 @@ function populateUserList(data, textStatus, jqXHR)
 
 	    	//alert(value);
 	      $select.append("<li><a onClick=\"displayProj('"+ value + "')\" id=\"'" + val.accountsID + "'\">" + val.nom_prenom + "</a></li>");
-	    })
+	    });
 	    //localStorage.setitem('mail',val.mail);
 
 	}
@@ -95,7 +100,7 @@ function displayProjList()
 		error: function(){   //if there is an error append a 'none available' option
 		   $select.html('<li><a id="-1">none available</a></li>');
 		}
-	})
+	});
 }
 
 function populateProjList(data, textStatus, jqXHR)
@@ -107,7 +112,7 @@ function populateProjList(data, textStatus, jqXHR)
 	    //iterate over the data and append a select option
 	    $.each(data, function(key, val){
 	      $select.append('<li><a onClick="saveInProjAcc(this.id, this.innerText)" id="' + val.ProjectID + '">' + val.ProjectName + '</a></li>');
-	    })
+	    });
 	    //localStorage.setitem('mail',val.mail);
 
 	}
@@ -168,12 +173,13 @@ function saveInProjAcc(id, value)
 			$('.sumUp').append('<br />');
 			$('#step3').removeClass("hide");
 		}
-	})
+	});
 
 }
 
 function setRole(roleName)
 {
+	var myAlert = document.createElement("div");
 	$('.sumUp').append('<span>' + roleName + '<span>');
 	var config = "https://sygdev.systra.info/config_" + localStorage.getItem("logon") + "_" + roleName + ".xml";
 	$.ajax({
@@ -183,14 +189,205 @@ function setRole(roleName)
 		url:"php/setRole.php",
 		success: function(data,textStatus,jqXHR)
 		{
-			alert(xhr.textStatus);
-			//populateProjList(data,textStatus,jqXHR);
+			//alert(xhr.textStatus);
+			//alert(data);
+			if(data.error)
+			{
+				myAlert.className = "alert alert-dismissable alert-danger fade";
+				myAlert.innerHTML += "<strong>Error!</strong> This user already get this role in config: <a href='"+data.config+"' target='_blank' class='alert-link'>"+data.config+"</a>";
+				var p = document.createElement("p");
+				var butDanger = document.createElement("button");
+				butDanger.setAttribute('type','button');
+				butDanger.className = "btn btn-danger";
+				butDanger.innerHTML = "Change Service";
+				butDanger.addEventListener('click',function(){
+					$(".alert").alert('close');
+					getServicesListInConfig(data.config);
+				}, false);
+				p.appendChild(butDanger);
+				var butDanger2 = document.createElement("button");
+				butDanger2.setAttribute('type','button');
+				butDanger2.setAttribute('style','float: right;');
+				butDanger2.className = "btn btn-danger";
+				butDanger2.innerHTML = "Cancel";
+				butDanger2.addEventListener('click',function(){
+					$(".alert").alert('close');
+				}, false);
+				p.appendChild(butDanger2);
+				myAlert.appendChild(p);
+			}
+			else
+			{
+				myAlert.className = "alert alert-dismissable alert-success fade";
+				myAlert.innerHTML += "<strong>Success</strong> Project add to user";
+			}
 		},
 		error: function(xhr, ajaxOptions, thrownError){ 
 			//if there is an error append a 'none available' option
 		    //$select.html('<li><a id="-1">none available</a></li>');
-		    alert(xhr.responseText);
+		    //alert(xhr);
+		},
+		complete: function()
+		{
+			$('#progressBar').width("50%");		
+			$('#progressBar').attr("aria-valuenow","50");
+
+			myAlert.insertAdjacentHTML('afterBegin','<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>');
+
+			var pgBar = document.getElementById('prog');
+			var parent = pgBar.parentNode;
+			parent.appendChild(myAlert);
+
+
+			myAlert.className += " in";
+
+			setTimeout(function(){
+					myAlert.className.replace(/\bin\b/,'');
+					//myAlert.className+='out'; 
+					//myAlert.parentNode.removeChild(myAlert)
+				}, 
+				3000);
+
+			$('.sumUp').append('<span>' + config + '<span>');
+			$('.sumUp').append('<br />');
+			$('#step3').removeClass("hide");
 		}
-	})
+	});
 
 }
+
+
+function getServicesListInConfig(url)
+{
+	var layers = [];
+
+	$.ajax({
+		type:"GET",
+		dataType:"xml",
+		url: url,
+		success: function(data,textStatus,jqXHR)
+		{
+			$(data).find('layer').each(function(){
+				var layer = {};
+				layer.id = $(this).attr('id');
+				layer.url = $(this).attr('url');
+				layers.push(layer);			
+			});
+		},
+		complete: function(){	
+
+			getToken(layers);
+		}
+	});
+}
+
+function getToken(layers)
+{
+	if (localStorage.getItem("token") == undefined)
+	{
+
+		$.ajax({
+			type:"POST",
+			data:{username:"sigadmin", password:"Sigfarm@n13", referer:"https://sygdev.systra.info/adminSYG", f:"json", expiration:15},
+			dataType:"json",
+			url: "https://vwpfr010app134:6443/arcgis/tokens/generateToken",
+			success: function(data,textStatus,jqXHR)
+			{
+				$("#step4").removeClass("hide");
+
+			    $(".source, .target").sortable({
+				  connectWith: ".connected"
+				});
+
+				displayServicesList(layers, data.token);
+				localStorage.setItem("token", data.token);
+			},
+			error: function()
+			{
+				alert("Impossible to connect the ArcGIS Server");
+			}
+		});
+	}
+	else
+	{
+		displayServicesList(layers, localStorage.getItem("token"));
+	}
+}
+
+function displayServicesList(layers, token)
+{
+	$.ajax({
+		type:"POST",
+		data:{token: token, f:"json"},
+		dataType:"json",
+		url: "https://sygdev.systra.info/arcgis/rest/services/SYG",
+		success: function(data,textStatus,jqXHR)
+		{
+			$serviceList = $('#serviceList');
+
+			$serviceList.html('');
+
+			$.each(data.services, function(key, val){
+		    	var value = JSON.stringify(val);
+		    	value = value.replace(/"/g,'&quot;');
+		    	//alert(value);
+		    	if(val.type == "MapServer")
+		    	{
+    		   	 $serviceList.append("<li><a onClick=\"getLayerList('"+ value + "')\"  id=\"'" + val.name + "'\">" + val.name + "</a></li>");
+		    	}
+		    });
+		},
+		error: function()
+		{
+			alert("Impossible to get SYG services");
+		}
+	});
+}
+
+function getLayerList(value)
+{
+	var dataSend = JSON.parse(value); 
+
+	$.ajax({
+		type:"POST",
+		data:{token: localStorage.getItem("token"), f:"json"},
+		dataType:"json",
+		url: "https://sygdev.systra.info/arcgis/rest/services/" + dataSend.name +"/MapServer",
+		success: function(data,textStatus,jqXHR)
+		{
+			$layerList = $('#layerList');
+
+			$layerList.html('');
+
+			$.each(data.layers, function(key, val){
+		    	var value = JSON.stringify(val);
+		    	value = value.replace(/"/g,'&quot;');
+		    	//alert(value);
+    		   	 $layerList.append("<li><a onClick=\"getLayerList('"+ value + "')\"  draggable='true' id=\"'" + val.name +"("+val.id+")" + "'\">" + val.name + "</a></li>");
+
+		    });
+		},
+		error: function()
+		{
+			alert("Impossible to get SYG layers");
+		}
+	});
+	
+
+}
+
+
+
+
+	
+/*	if(textStatus == "success")
+	{
+	   $select.html('');
+	    //iterate over the data and append a select option
+	    $.each(data, function(key, val){
+	    	var value = JSON.stringify(val);
+	    	value = value.replace(/"/g,'&quot;');
+
+	    	//alert(value);
+	      $select.append("<li><a onClick=\"displayProj('"+ value + "')\" id=\"'" + val.accountsID + "'\">" + val.nom_prenom + "</a></li>");
+	    });*/

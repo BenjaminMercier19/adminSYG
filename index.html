@@ -14,10 +14,14 @@
 
   <body role="document">
 
-   <script type="text/javascript" src="libs/jquery-2.1.0.min.js"></script>
-   <script src="libs/js/bootstrap.min.js"></script>
-   <script src="libs/js/underscore.string.min.js"></script>                    
-   <script type="text/javascript" src="js/displayForm.js"></script>
+    <script type="text/javascript" src="libs/js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="libs/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="libs/js/jquery.sortable.min.js"></script>
+    <script type="text/javascript" src="libs/js/jquery-ui-1.10.4.custom.min.js"></script>
+    
+
+    <script type="text/javascript" src="libs/js/underscore.string.min.js"></script>                    
+    <script type="text/javascript" src="js/displayForm.js"></script>
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
@@ -42,6 +46,11 @@
 
     <div class="sumUp">
       <h2><span class="glyphicon glyphicon-th-large"></span>Résumé</h2>
+      <div class="User"></div>
+      <div class="Project"></div>
+      <div class="Role"></div>
+      <div class="Config"></div>
+      <div class="Service"></div>
     </div>
 
     <div class="container theme-showcase page" role="main">
@@ -53,7 +62,7 @@
         <button type="button" id="b1" class="btn btn-default" onclick="createUser()">Ajouter un nouvel utilisateur</button>
         <button type="button" id="b2" class="btn btn-default" onclick="displayUserForm()">Choisir un utilisateur existant</button>
       </div>
-
+      <img src='assets/images/ajax-loader.gif' id='loader' style='display:none;' alt='loading...' />
 
       <div id='selectPeople' style="display:none;" class="btn-group">
         <button type="button" class="btn btn-primary">User List</button>
@@ -101,6 +110,38 @@
             <li><a onClick="setRole(this.id)" id="Client">Client</a></li>
           </ul>
         </div>
+      </div>
+
+
+      <div id="step4" class="hide"> 
+        <div class="page-header">
+           <h1>Choisissez les services</h1>    
+        </div>
+        <div id='selectService' class="btn-group">
+          <button type="button" class="btn btn-primary">Services List</button>
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            <span class="sr-only">Services List</span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu myList" id="serviceList" role="menu"></ul>
+         </div> 
+        
+        <div id='selectLayer' class="btn-group">
+          <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-move"></span>Layers List</button>
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            <span class="sr-only">Layers List</span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu myList source connected" id="layersList" role="menu"></ul>
+        </div>
+        
+        <div id='dropZone' class="dropZone btn-group">
+          <span class="glyphicon glyphicon-edit"></span>   Drop here "hole in edition" layer  <ul class="target connected"></ul>
+        </div>
+         <div id='dropZoneBis' class="dropZone btn-group"> 
+          <span class="glyphicon glyphicon-eye-open"></span>   Drop here "hole validated" layer  <ul class="target connected"></ul>
+        </div>
+      
       </div>
 
     </div>
