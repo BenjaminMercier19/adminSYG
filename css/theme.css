@@ -6,7 +6,7 @@ body {
 
 html
 {
-	height:100%;
+  height:100%;
 }
 
 .alert
@@ -35,21 +35,21 @@ html
 
 .myList
 {
-	max-height: 250px;
-	overflow-y: auto;
+  max-height: 250px;
+  overflow-y: auto;
 }
 
 .page
 {
-	min-height: 100%;
-	height: auto;
-	margin: 0 auto -60px;
-	padding: 0 0 60px;
+  min-height: 100%;
+  height: auto;
+  margin: 0 auto -60px;
+  padding: 0 0 60px;
 }
 
 #footer
 {
-	height: 60px;
+  height: 60px;
   bottom: 3px;
   margin-top: 60px;
 }
@@ -57,7 +57,16 @@ html
 .sumUp
 {
   position: fixed;
-  background-color: red;
+  background: -webkit-linear-gradient(deepskyblue, dodgerblue);
+  background:    -moz-linear-gradient(deepskyblue, dodgerblue);
+  background:     -ms-linear-gradient(deepskyblue, dodgerblue);
+  background:      -o-linear-gradient(deepskyblue, dodgerblue);
+  background:         linear-gradient(deepskyblue, dodgerblue);
+  border-radius: 7px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .3),
+              0 3px 5px rgba(0, 0, 0, .2),
+              0 5px 10px rgba(0, 0, 0, .2),
+              0 20px 20px rgba(0, 0, 0, .15);
   z-index: 100;
   float: right;
   height: 400px;
@@ -92,6 +101,7 @@ html
 }
 
 .sumUp span {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .4);    
   padding: 0px 10px;
   color: white;
   -webkit-transform: rotate(0deg);
