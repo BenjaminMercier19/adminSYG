@@ -1,24 +1,19 @@
 (function(){
 	window.addEventListener('load', onLoadHandler, false);
-
 	localStorage.clear();
 })();
 
 function onLoadHandler(e)
 {
 	var page = document.getElementsByClassName('page')[0];
-	//alert(getComputedStyle(page, null).marginRight);
 	$('.sumUp').width(getComputedStyle(page, null).marginRight);
 }
 
 function displayUserForm()
 {
-
 	//lancer le script PHP pour avoir la liste des users
-	//TODO loading gif
 	$("#loader").show();
 	$select = $('#myList');
-	
 	$.ajax({
 		type:"POST",
 		dataType:"json",
@@ -46,9 +41,7 @@ function populateUserList(data, textStatus, jqXHR)
 	    $.each(data, function(key, val){
 	    	var value = JSON.stringify(val);
 	    	value = value.replace(/"/g,'&quot;');
-
-	    	//alert(value);
-	      $select.append("<li><a onClick=\"displayProj('"+ value + "')\" id=\"'" + val.accountsID + "'\">" + val.nom_prenom + "</a></li>");
+	      	$select.append("<li><a onClick=\"displayProj('"+ value + "')\" id=\"'" + val.accountsID + "'\">" + val.nom_prenom + "</a></li>");
 	    });
 	    //localStorage.setitem('mail',val.mail);
 
@@ -288,16 +281,14 @@ function getToken(layers)
 
 		$.ajax({
 			type:"POST",
-			data:{username:"sigadmin", password:"Sigfarm@n13", referer:"https://sygdev.systra.info/adminSYG", f:"json", expiration:15},
+			data:{username:"sigadmin", password:"Sigfarm@n13", referer:"https://sygdev.systra.info/adminSYG", f:"json"},
 			dataType:"json",
-			url: "https://vwpfr010app134:6443/arcgis/tokens/generateToken",
+			url: "http://vwpfr010app134:6080/arcgis/tokens/generateToken",
 			success: function(data,textStatus,jqXHR)
 			{
 				$("#step4").removeClass("hide");
 
-			    $(".source, .target").sortable({
-				  connectWith: ".connected"
-				});
+
 
 				displayServicesList(layers, data.token);
 				localStorage.setItem("token", data.token);
@@ -347,7 +338,22 @@ function displayServicesList(layers, token)
 function getLayerList(value)
 {
 	var dataSend = JSON.parse(value); 
+	
+	$(".source, .target").sortable({
+		connectWith: ".connected"
+	});
 
+	$(".target").on("sortupdate", function(e) {
+		updateValues(e);
+	});
+	/*$(".source").on("sortupdate", function(e) {
+		updateValuesBis(e);
+	});*/
+/*
+ 	$('ul.target li').livequery(function() {
+	  alert('added');
+	  
+	});*/
 	$.ajax({
 		type:"POST",
 		data:{token: localStorage.getItem("token"), f:"json"},
@@ -355,16 +361,18 @@ function getLayerList(value)
 		url: "https://sygdev.systra.info/arcgis/rest/services/" + dataSend.name +"/MapServer",
 		success: function(data,textStatus,jqXHR)
 		{
-			$layerList = $('#layerList');
+			$layerList = $('#layersList');
 
 			$layerList.html('');
 
-			$.each(data.layers, function(key, val){
-		    	var value = JSON.stringify(val);
-		    	value = value.replace(/"/g,'&quot;');
-		    	//alert(value);
-    		   	 $layerList.append("<li><a onClick=\"getLayerList('"+ value + "')\"  draggable='true' id=\"'" + val.name +"("+val.id+")" + "'\">" + val.name + "</a></li>");
+			//$('#dropZone ul')
 
+			$.each(data.layers, function(key, val){
+		    	var oResult = JSON.stringify(val);
+		    	oResult = oResult.replace(/"/g,'&quot;');
+		    	//alert(value);
+    		   	$layerList.append("<li><a draggable='true' id=\"'" + val.id + "'\">" + val.name + "</a></li>");
+    		   		
 		    });
 		},
 		error: function()
@@ -372,13 +380,43 @@ function getLayerList(value)
 			alert("Impossible to get SYG layers");
 		}
 	});
-	
-
 }
 
 
+function updateValues(e)
+{
+	if(e.currentTarget)
+	{
+		if ( $('#'+e.currentTarget.parentElement.id+' ul > *').length > 0 ) {
+	    	alert('added');
+	    	$('#'+e.currentTarget.parentElement.id+' ul').removeClass('connected');
+		}
+		else
+		{
+	    	alert('removed1');
+	    	$('#'+e.currentTarget.parentElement.id+' ul').addClass('connected');
+		}
+	}
+}
 
 
+/*function updateValuesBis(e)
+{
+	if($("#dropZone ul > *").length == 0)
+	{
+    	alert('removed');
+    	$("#dropZone ul").addClass('connected');
+	}
+
+	if($("#dropZoneBis ul > *").length == 0)
+	{
+    	alert('removed Bis');
+    	$("#dropZoneBis ul").addClass('connected');
+	}
+}*/
+/*
+
+*/
 	
 /*	if(textStatus == "success")
 	{
