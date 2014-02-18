@@ -44,8 +44,8 @@ function saveInProjAcc(id, value)
 			myAlert.className += " in";
 
 			setTimeout(function(){myAlert.className.replace(/\bin\b/,''); myAlert.className+='out'; myAlert.parentNode.removeChild(myAlert)}, 3000);
-			$('.sumUp').append('<span>' + value + '<span>');
-			$('.sumUp').append('<br />');
+			$('.sumUp .Project').append('<span>' + value + '<span>');
+			$('.sumUp .Project').append('<br />');
 			$('#step3').removeClass("hide");
 		}
 	});

@@ -1,8 +1,10 @@
 function setRole(roleName)
 {
+	var projName = $('.Project span')[0].innerText;
+	alert(projName);
 	var myAlert = document.createElement("div");
-	$('.sumUp').append('<span>' + roleName + '<span>');
-	var config = "https://sygdev.systra.info/config_" + localStorage.getItem("logon") + "_" + roleName + ".xml";
+	$('.Role').append('<span>' + roleName + '<span>');
+	var config = "https://sygdev.systra.info/config_" + localStorage.getItem("logon") + "_" + roleName + "_" + projName + ".xml";
 	$.ajax({
 		type:"POST",
 		data: {projAccID:localStorage.getItem("projAccID"), roleName: roleName, config: config},
@@ -59,7 +61,6 @@ function setRole(roleName)
 			var parent = pgBar.parentNode;
 			parent.appendChild(myAlert);
 
-
 			myAlert.className += " in";
 
 			setTimeout(function(){
@@ -69,8 +70,8 @@ function setRole(roleName)
 				}, 
 				3000);
 
-			$('.sumUp').append('<span>' + config + '<span>');
-			$('.sumUp').append('<br />');
+			$('.Config').append('<span>' + config + '<span>');
+			$('.Config').append('<br />');
 			$('#step3').removeClass("hide");
 		}
 	});

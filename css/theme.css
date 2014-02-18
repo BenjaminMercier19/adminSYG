@@ -57,11 +57,12 @@ html
 .sumUp
 {
   position: fixed;
-  background: -webkit-linear-gradient(deepskyblue, dodgerblue);
-  background:    -moz-linear-gradient(deepskyblue, dodgerblue);
-  background:     -ms-linear-gradient(deepskyblue, dodgerblue);
-  background:      -o-linear-gradient(deepskyblue, dodgerblue);
-  background:         linear-gradient(deepskyblue, dodgerblue);
+  background-image: -webkit-linear-gradient(top,#428bca 0,#2d6ca2 100%);
+  background-image: linear-gradient(to bottom,#428bca 0,#2d6ca2 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff428bca', endColorstr='#ff2d6ca2', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  background-repeat: repeat-x;
+  border-color: #2b669a;
   border-radius: 7px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .3),
               0 3px 5px rgba(0, 0, 0, .2),
@@ -71,6 +72,10 @@ html
   float: right;
   height: 400px;
   right: 0;
+
+  text-shadow : 0 1px 0 rgba(255, 255, 255, .4);    
+  padding: 0px 10px;
+  color: white;
 }
 
 .out
