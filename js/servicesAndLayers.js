@@ -35,9 +35,6 @@ function getToken(layers)
 			success: function(data,textStatus,jqXHR)
 			{
 				$("#step4").removeClass("hide");
-
-
-
 				displayServicesList(layers, data.token);
 				localStorage.setItem("token", data.token);
 			},
@@ -102,6 +99,10 @@ function getLayerList(value)
 		url: "https://sygdev.systra.info/arcgis/rest/services/" + dataSend.name +"/MapServer",
 		success: function(data,textStatus,jqXHR)
 		{
+			localStorage.setItem("xmax", data.initialExtent.xmax);
+			localStorage.setItem("xmin", data.initialExtent.xmin);
+			localStorage.setItem("ymax", data.initialExtent.ymax);
+			localStorage.setItem("ymin", data.initialExtent.ymin);
 			$layerList = $('#layersList');
 
 			$layerList.html('');

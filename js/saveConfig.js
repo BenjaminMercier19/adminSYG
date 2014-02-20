@@ -17,7 +17,11 @@ function saveConfig()
 			user: localStorage.getItem("logon"),
 			mail: localStorage.getItem("mail"),
 			role: $('.Role span')[0].innerText, 
-			config: $('.Config span')[0].innerText
+			config: $('.Config span')[0].innerText,
+			xmin: localStorage.getItem("xmin"),
+			ymin: localStorage.getItem("ymin"),
+			xmax: localStorage.getItem("xmax"),
+			ymax: localStorage.getItem("ymax")
 		};
 
 		$.ajax({
@@ -29,8 +33,9 @@ function saveConfig()
 			{
 				alert("success");
 			},
-			error: function(){   //if there is an error append a 'none available' option
-			   alert("error");
+			error: function(e){
+			   //if there is an error append a 'none available' option
+			   alert(e.responseText);
 			}
 		});
 	}

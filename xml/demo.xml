@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+// Read more about ArcGIS Viewer for Flex - http://links.esri.com/flexviewer
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<configuration>
+    <title></title>
+    <subtitle></subtitle>
+    <logo>assets/images/tabRed.png</logo>
+    
+    <style>
+      	<colors>0xD22228,0xFFFFFF,0x959595,0xFFFFFF,0xD22228</colors>
+        <alpha>0.9</alpha>
+        <font name="calibri"/>
+        <titlefont name="Calibri"/>
+    </style>
+    <!-- replace the following url with your own geometryservice -->
+    <geometryservice url="http://tasks.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer"/>
+
+    <!-- UI elements -->
+    
+    <widget left="10" top="90" config="widgets/Navigation/NavigationWidget.xml" url="widgets/Navigation/NavigationWidget.swf"/>
+    <widget right="0" bottom="0" config="widgets/OverviewMap/OverviewMapWidget.xml" url="widgets/OverviewMap/OverviewMapWidget.swf"/>
+    <widget right="20" top="55" config="widgets/MapSwitcher/MapSwitcherWidget.xml" url="widgets/MapSwitcher/MapSwitcherWidget.swf"/>
+    <widget left="0" top="0" config="widgets/HeaderController/HeaderControllerWidget.xml" url="widgets/HeaderController/HeaderControllerWidget.swf"/>
+    
+    <map id="Map" attributionvisible="false" esrilogovisible="false" openhandcursorvisible="false" scalebarvisible="true" scalebar="metric" zoomslidervisible="false" wraparound180="true" addarcgisbasemaps="true" wkid="102100" initialextent="" fullextent="-20033368,-25557230,20033368, 25557230" top="40" portalurl="https://www.arcgis.com">
+        <operationallayers>
+           <layer id="HoleInEdition" label="HoleInEdition" type="feature" visible="true" alpha="1.0" popupconfig="popups/PopUp_Hole.xml" url=""/>
+           <layer id="HoleValidated" label="HoleValidated" type="feature" visible="true" alpha="1.0" popupconfig="popups/PopUp_Hole.xml" url=""/>
+       </operationallayers>
+    </map>
+
+    <widgetcontainer layout="float">
+        <widget label="Search" left="80" top="280" icon="assets/images/i_search.png" config="widgets/SearchWidget/SearchWidget_LOCA.xml" url="widgets/SearchWidget/SearchWidget.swf"/>
+        <widget label="Print" left="390" top="400" icon="assets/images/i_print.png" config="widgets/Print/PrintWidget.xml" url="widgets/Print/PrintWidget.swf"/>
+        <widget label="Layer List" icon="assets/images/i_layers.png" config="widgets/LayerList/LayerListWidget.xml" url="widgets/LayerList/LayerListWidget.swf"/>   
+    </widgetcontainer>
+    
+    <GrainStandard></GrainStandard>
+    
+    <responsable>
+    	<name></name>
+    	<alias></alias>
+    	<mail></mail>
+    </responsable>
+</configuration>
