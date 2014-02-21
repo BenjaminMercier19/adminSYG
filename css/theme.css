@@ -145,7 +145,7 @@ ul.source {
   border-color: #f8e0b1;
 }
 ul.target {
-  border-color: #add38d;
+  border-color: #4E80B6;
   margin-top: 10px;
   margin-left: 15px;
 }
@@ -193,11 +193,30 @@ ul.target {
 
 .dropZone
 {
-  margin: 0px 50px;
+  vertical-align: top;
+  font-weight: bold;
 }
+
 
 .dropZone span
 {
   margin-right: 10px;
   font-size: x-large;
+  color: #4E80B6;
+}
+
+#layerList
+{
+  height: 490px;
+}
+
+tr
+{
+  height: 75px;
+}
+
+td
+{
+  text-align: center;
+  padding: 10px;
 }
