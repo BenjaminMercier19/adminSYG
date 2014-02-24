@@ -54,6 +54,26 @@ html
   margin-top: 60px;
 }
 
+#addForm
+{
+  margin: 20px 0;
+}
+
+#addForm input
+{
+  width: 200px;
+}
+
+#addForm span
+{
+  margin-bottom: 10px;
+}
+#addForm select
+{
+  width: 200px;
+  margin-bottom: 10px;
+}
+
 .sumUp
 {
   position: fixed;

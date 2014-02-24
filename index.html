@@ -27,7 +27,8 @@
     <script type="text/javascript" src="js/setProjToProjAccSQL.js"></script>
     <script type="text/javascript" src="js/setRole.js"></script>  
     <script type="text/javascript" src="js/servicesAndLayers.js"></script> 
-     <script type="text/javascript" src="js/saveConfig.js"></script>  
+    <script type="text/javascript" src="js/saveConfig.js"></script>  
+    <script type="text/javascript" src="js/saveName.js"></script>  
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
@@ -70,7 +71,7 @@
       </div>
       <img src='assets/images/ajax-loader.gif' id='loader' style='display:none;' alt='loading...' />
 
-      <div id='selectPeople' style="display:none;" class="btn-group">
+      <div id='selectPeople' class="btn-group hide">
         <button type="button" class="btn btn-primary">User List</button>
         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
           <span class="sr-only">User List</span>
@@ -79,7 +80,20 @@
         <ul class="dropdown-menu" id="myList" role="menu">
         </ul>
       </div>
+      
+      <div id="addForm" class="hide">
+          <input type="text" class="form-control" placeholder="Entrer le login ici"> 
+          <span class="help-block">Si cette personne est de SYSTRA, entrez ici son login windows (ex:bmercier1) sinon entrer le nom que vous souhaitez lui attribuer dans l'application</span>
+          <span>Cette personne a-t-elle un compte SYSTRA?
+          <select class="form-control">
+            <option value="1">Oui</option>
+            <option value="0" selected>Non</option>
+          </select>
+          </span> 
+          <button type="button" id="setName"  class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk" style="margin-right: 10px; font-size: x-large; vertical-align: middle;"></span>Enregistrer</button>
 
+      </div>
+      
       <div id="step2" class="hide"> 
         <div class="page-header">
            <h1>Choisissez le projet affilié</h1>    
@@ -166,12 +180,12 @@
                  <input type="text" class="form-control" placeholder="Set subtitle here">
               </td>
               <td>
-                 <input type="email" class="form-control" placeholder="Set responsible name">
+                 <input id="respoName" type="email" class="form-control hide" placeholder="Set responsible name">
               </td>
               <td>
-                <div class="form-group has-error has-feedback" style="top: 5px;">
-                  <input type="email" class="form-control" id="inputError2" laceholder="Set responsible mail">
-                  <span class="glyphicon glyphicon-remove form-control-feedback" style="top: 0;"></span>
+                <div class="form-group has-feedback hide" id="respoMail" style="top: 5px;">
+                  <input type="email" class="form-control" id="inputError2" placeholder="Set responsible mail">
+                  <span class="glyphicon glyphicon-envelope form-control-feedback" style="top: 0;"></span>
                 </div>
               </td>
             </tr>

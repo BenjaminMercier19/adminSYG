@@ -20,14 +20,29 @@ function displayUserForm()
 function populateUserList(data, textStatus, jqXHR)
 {
 	$("#loader").hide();
-	$('#selectPeople').show();
+	$('#selectPeople').removeClass("hide");
 	//alert("proj");
 	$select = $('#myList');
 	if(textStatus == "success")
 	{
-	   $select.html('');
-	    //iterate over the data and append a select option
-	    $.each(data, function(key, val){
+	   	data = data.sort(function(a, b) {
+	   		if(a.nom_prenom == null)
+	   		{
+	   			a.nom_prenom = "null";
+	   		}
+	   		if(b.nom_prenom == null)
+	   		{
+	   			b.nom_prenom = "null";
+	   		}
+	      	if (a.nom_prenom.toLowerCase() < b.nom_prenom.toLowerCase()) return -1;
+			if (a.nom_prenom.toLowerCase() > b.nom_prenom.toLowerCase()) return 1;
+    		return 0;
+	   	});
+	   
+
+	   	$select.html('');
+   		//iterate over the data and append a select option
+		$.each(data, function(key, val){
 	    	var value = JSON.stringify(val);
 	    	value = value.replace(/"/g,'&quot;');
 	      	$select.append("<li><a onClick=\"displayProj('"+ value + "')\" id=\"'" + val.accountsID + "'\">" + val.nom_prenom + "</a></li>");
@@ -47,7 +62,10 @@ function createUser()
 {
 	$('#progressBar').width("0%");		
 	$('#progressBar').attr("aria-valuenow","0");
-	$('#selectPeople').hide();
+	$('#selectPeople').addClass('hide');
+	$('#addForm').removeClass('hide');
+	//$('#selectPeople').addClass('hide');
+	
 }
 
 function createConfigFile(config)

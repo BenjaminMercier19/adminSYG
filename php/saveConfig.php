@@ -12,9 +12,9 @@
 	$ymax = $_POST["ymax"];
 	
 	$arrConf = explode("info/",$config);
-	$filename = dirname(dirname( dirname(__FILE__)))."\\".$arrConf[1];
+	$filename = dirname(dirname( dirname(__FILE__)))."\\config\\".$arrConf[1];
 
-	if (file_exists($filename)) {
+	if (dirname(dirname(__FILE__))."\xml\demo.xml") {
     	
     	$xml = new DOMDocument();
     	$xml->preserveWhiteSpace = false;
@@ -117,6 +117,7 @@
 
 		//TODO set Title, Subtitle, GrainStandard and Responsable
 		$xml->save($filename);
+		//$xml->save(dirname(dirname(dirname(__FILE__))).'\config\test.xml');
 
 		//Cas où il n'y a pas de balise layers 
 		/*else

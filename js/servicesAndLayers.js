@@ -34,7 +34,6 @@ function getToken(layers)
 			url: "http://vwpfr010app134:6080/arcgis/tokens/generateToken",
 			success: function(data,textStatus,jqXHR)
 			{
-				$("#step4").removeClass("hide");
 				displayServicesList(layers, data.token);
 				localStorage.setItem("token", data.token);
 			},
@@ -52,6 +51,7 @@ function getToken(layers)
 
 function displayServicesList(layers, token)
 {
+
 	$.ajax({
 		type:"POST",
 		data:{token: token, f:"json"},
@@ -59,17 +59,22 @@ function displayServicesList(layers, token)
 		url: "https://sygdev.systra.info/arcgis/rest/services/SYG",
 		success: function(data,textStatus,jqXHR)
 		{
+			$("#step4").removeClass("hide");
+			if($(".Role span") == "Prestataire")
+			{
+				$("#respoName").removeClass("hide");
+				$("#respoMail").removeClass("hide");
+			}
+
 			$serviceList = $('#serviceList');
-
 			$serviceList.html('');
-
 			$.each(data.services, function(key, val){
 		    	var value = JSON.stringify(val);
 		    	value = value.replace(/"/g,'&quot;');
 		    	//alert(value);
 		    	if(val.type == "MapServer")
 		    	{
-    		   	 $serviceList.append("<li><a onClick=\"getLayerList('"+ value + "')\"  id=\"'" + val.name + "'\">" + val.name + "</a></li>");
+    		   		$serviceList.append("<li><a onClick=\"getLayerList('"+ value + "')\"  id=\"'" + val.name + "'\">" + val.name + "</a></li>");
 		    	}
 		    });
 		},
@@ -103,6 +108,7 @@ function getLayerList(value)
 			localStorage.setItem("xmin", data.initialExtent.xmin);
 			localStorage.setItem("ymax", data.initialExtent.ymax);
 			localStorage.setItem("ymin", data.initialExtent.ymin);
+			
 			$layerList = $('#layersList');
 
 			$layerList.html('');
@@ -130,12 +136,12 @@ function updateValues(e)
 	if(e.currentTarget)
 	{
 		if ( $('#'+e.currentTarget.parentElement.id+' ul > *').length > 0 ) {
-	    	alert('added');
+	    	//alert('added');
 	    	$('#'+e.currentTarget.parentElement.id+' ul').removeClass('connected');
 		}
 		else
 		{
-	    	alert('removed1');
+	    	//alert('removed1');
 	    	$('#'+e.currentTarget.parentElement.id+' ul').addClass('connected');
 		}
 	}
