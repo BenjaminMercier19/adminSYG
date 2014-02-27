@@ -82,7 +82,7 @@
       </div>
       
       <div id="addForm" class="hide formStyle">
-      
+
         <span>Cette personne a-t-elle un compte SYSTRA?
           <select id="ldap" class="form-control">
             <option value="1">Oui</option>
@@ -175,9 +175,9 @@
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu myList" id="roleList" role="menu">
-            <li><a onClick="setRole(this.id)" id="Validateur">Validateur</a></li>
-            <li><a onClick="setRole(this.id)" id="Prestataire">Prestataire</a></li>
-            <li><a onClick="setRole(this.id)" id="Client">Client</a></li>
+            <li><a id="Validateur">Validateur</a></li>
+            <li><a id="Prestataire">Prestataire</a></li>
+            <li><a id="Client">Client</a></li>
           </ul>
         </div>
       </div>
@@ -208,7 +208,7 @@
                     <span class="sr-only">Layers List</span>    
                     <span class="caret"></span>   
                   </button>   
-                  <ul class ="dropdown-menu myList source connected" id="layersList" role="menu"></ul> 
+                  <ul class ="dropdown-menu source connected" id="layersList" role="menu"></ul> 
                 </div>
               </td> 
               <td>
@@ -224,16 +224,16 @@
             </tr>
             <tr>
               <td>
-                 <input type="text" class="form-control" placeholder="Set title here">
+                 <input type="text" id='titleConfig' class="form-control" placeholder="Set title here">
               </td>
               <td>
-                 <input type="text" class="form-control" placeholder="Set subtitle here">
+                 <input type="text" id='subTitleConfig' class="form-control" placeholder="Set subtitle here">
               </td>
               <td>
                  <input id="respoName" type="email" class="form-control hide" placeholder="Set responsible name">
               </td>
               <td>
-                <div class="form-group has-feedback hide" id="respoMail" style="top: 5px;">
+                <div class="form-group has-feedback hide" id="respoMail">
                   <input type="email" class="form-control" id="inputError2" placeholder="Set responsible mail">
                   <span class="glyphicon glyphicon-envelope form-control-feedback" style="top: 0;"></span>
                 </div>
@@ -247,6 +247,23 @@
           </tbody>
         </table>
       </div>
+
+
+    <!-- Small modal -->
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" id="myModal" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
+          </div>
+          <div class="modal-header">
+            ...
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     </div>
 

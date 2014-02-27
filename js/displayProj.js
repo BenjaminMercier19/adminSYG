@@ -19,7 +19,9 @@ function displayProj(data)
 
 	$('#step2').removeClass("hide");
 
-	$('.User')[0].innerHTML = '<span>' + _.string.titleize(_.string.humanize(value.nom_prenom)) + '</span>';
+	$html = '<span class="glyphicon glyphicon-user"></span>';
+	$html += '<span>' + _.string.titleize(_.string.humanize(value.nom_prenom)) + '</span>';
+	$('.User')[0].innerHTML = $html;
 }
 
 
@@ -65,7 +67,7 @@ function populateProjList(data, textStatus)
 	   $select.html('');
 	    //iterate over the data and append a select option
 	    $.each(data, function(key, val){
-	      $select.append('<li><a onClick="saveInProjAcc(this.id, this.innerText)" id="' + val.ProjectID + '">' + _.string.titleize(_.string.humanize(val.ProjectName)) + '</a></li>');
+	      $select.append('<li><a onClick="saveInProjAcc(this.id, this.innerText)" id="' + val.ProjectID + '">' + _.string.titleize(_.string.humanize(val.ProjectName.toLowerCase())) + '</a></li>');
 	    });
 	    //localStorage.setitem('mail',val.mail);
 
@@ -87,7 +89,7 @@ function createProj()
 function saveProj()
 {
 	var data = {
-		projName : _.string.titleize(_.string.humanize($("#createProjInput").val())),
+		projName : _.string.titleize(_.string.humanize($("#createProjInput").val().toLowerCase())),
 		accID: localStorage.getItem('accountsID')  
 	};
 
@@ -119,7 +121,11 @@ function saveProj()
 					localStorage.setItem('projID', data.projID);
 					$('#progressBar').width("30%");		
 					$('#progressBar').attr("aria-valuenow","30");
-					$('.Project')[0].innerHTML = '<span>' + data.projName + '</span>';
+
+					$html = '<span class="glyphicon glyphicon-road"></span>';
+					$html +='<span>' + data.projName + '</span>';
+					$('.Project')[0].innerHTML = $html;
+					
 					$('#step3').removeClass("hide");
 					
 				}

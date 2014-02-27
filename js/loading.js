@@ -44,12 +44,13 @@ function onLoadHandler(e)
     $('#chooseProj').on('click', displayProjList);
 	$(".setProj").on('click', saveProj);	
 
+	//Set listener for Role
+	$("#roleList li").on('click', setRole);
+	/*$("#Validateur").on('click', setRole(this.id));
+	$("#Prestataire").on('click', setRole(this.id));
+	$("#Client").on('click', setRole(this.id));*/
+
+
     //Set listenr for saving config file
 	$("#setConfig").on('click', saveConfig);
-
-	
-
-
-
- 
 }

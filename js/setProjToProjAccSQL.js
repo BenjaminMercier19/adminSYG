@@ -45,7 +45,9 @@ function saveInProjAcc(id, value)
 
 			setTimeout(function(){myAlert.className.replace(/\bin\b/,''); myAlert.className+='out'; myAlert.parentNode.removeChild(myAlert)}, 3000);
 			
-			$('.Project').innerHTML = '<span>' + value + '</span>';
+			$html = '<span class="glyphicon glyphicon-road"></span>';
+			$html +='<span>' + value + '</span>';
+			$('.Project')[0].innerHTML = $html;
 			$('#step3').removeClass("hide");
 		},
 		error: function(e){

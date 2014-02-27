@@ -1,4 +1,4 @@
-function getServicesListInConfig(url)
+/*function getServicesListInConfig(url)
 {
 	var layers = [];
 
@@ -17,13 +17,14 @@ function getServicesListInConfig(url)
 		},
 		complete: function(){	
 
-			getToken(layers);
+			getToken();
 		}
 	});
-}
+}*/
 
-function getToken(layers)
+function getToken()
 {
+	var token;
 	if (localStorage.getItem("token") == undefined)
 	{
 
@@ -34,8 +35,9 @@ function getToken(layers)
 			url: "http://vwpfr010app134:6080/arcgis/tokens/generateToken",
 			success: function(data,textStatus,jqXHR)
 			{
-				displayServicesList(layers, data.token);
+				//displayServicesList(data.token);
 				localStorage.setItem("token", data.token);
+				token = data.token;
 			},
 			error: function()
 			{
@@ -45,11 +47,13 @@ function getToken(layers)
 	}
 	else
 	{
-		displayServicesList(layers, localStorage.getItem("token"));
+		token = localStorage.getItem("token");
+		//displayServicesList(localStorage.getItem("token"));
 	}
+	return token;
 }
 
-function displayServicesList(layers, token)
+function displayServicesList(token)
 {
 
 	$.ajax({
@@ -60,7 +64,7 @@ function displayServicesList(layers, token)
 		success: function(data,textStatus,jqXHR)
 		{
 			$("#step4").removeClass("hide");
-			if($(".Role span") == "Prestataire")
+			if($('.Role span').eq(1).text() == "Prestataire")
 			{
 				$("#respoName").removeClass("hide");
 				$("#respoMail").removeClass("hide");
@@ -89,6 +93,9 @@ function getLayerList(value)
 {
 	var dataSend = JSON.parse(value); 
 	
+	$('ul.target').empty();
+	$('ul.target').addClass('connected');
+
 	$(".source, .target").sortable({
 		connectWith: ".connected"
 	});
