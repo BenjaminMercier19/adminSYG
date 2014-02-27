@@ -60,14 +60,14 @@
       <div class="Service"></div>
     </div>
 
-    <div class="container theme-showcase page" role="main">
+    <div class="container theme-showcase page" id="Home" role="main">
       <div class="page-header">
          <h1>Choisissez le type d'utilisateur</h1>    
       </div>
      
       <div class="btn-group">
-        <button type="button" id="b1" class="btn btn-default" onclick="createUser()">Ajouter un nouvel utilisateur</button>
-        <button type="button" id="b2" class="btn btn-default" onclick="displayUserForm()">Choisir un utilisateur existant</button>
+        <button type="button" id="addUserBut" class="btn btn-default">Ajouter un nouvel utilisateur</button>
+        <button type="button" id="chooseUserBut" class="btn btn-default">Choisir un utilisateur existant</button>
       </div>
       <img src='assets/images/ajax-loader.gif' id='loader' style='display:none;' alt='loading...' />
 
@@ -81,16 +81,51 @@
         </ul>
       </div>
       
-      <div id="addForm" class="hide">
-          <input type="text" class="form-control" placeholder="Entrer le login ici"> 
-          <span class="help-block">Si cette personne est de SYSTRA, entrez ici son login windows (ex:bmercier1) sinon entrer le nom que vous souhaitez lui attribuer dans l'application</span>
-          <span>Cette personne a-t-elle un compte SYSTRA?
-          <select class="form-control">
+      <div id="addForm" class="hide formStyle">
+      
+        <span>Cette personne a-t-elle un compte SYSTRA?
+          <select id="ldap" class="form-control">
             <option value="1">Oui</option>
             <option value="0" selected>Non</option>
           </select>
-          </span> 
-          <button type="button" id="setName"  class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk" style="margin-right: 10px; font-size: x-large; vertical-align: middle;"></span>Enregistrer</button>
+        </span>
+
+        <form class="form-inline withLdap hide" role="form">
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputlogin1">Login</label>
+            <input type="text" class="form-control login" id="exampleInputlogin1" placeholder="Entrer le login ici"> 
+            <span class="help-block">Pour cette personne de SYSTRA, entrez ici son login windows (ex:bmercier1)</span>
+          </div>
+          <div class="form-group">
+           <button type="button" class="btn btn-success setName"><span class="glyphicon glyphicon-floppy-disk" style="margin-right: 10px; font-size: x-large; vertical-align: middle;"></span>Enregistrer</button>
+          </div>
+        </form>
+
+        <form class="form-inline withoutLdap" role="form">
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputlogin2">Login</label>
+            <input type="text" class="form-control login" id="exampleInputlogin2" placeholder="Entrer le login ici"> 
+            <span class="help-block">Pour cette personne entrez le login que vous voulez lui attribuer dans l'application</span>
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputPWD2">Mot de passe</label>
+            <input type="text" class="form-control" id="exampleInputPWD2" placeholder="Entrer un mot de passe"> 
+            <span class="help-block">Pour cette personne entrez le mot de passe que vous voulez lui attribuer dans l'application</span>
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputNom_Prenom2">Nom et/ou prénom à afficher</label>
+            <input type="text" class="form-control" id="exampleInputNom_Prenom2" placeholder="Entrer prénom et nom"> 
+            <span class="help-block">Pour cette personne entrez un nom et/ou prénom (ex: prestataire Baku, SOBESOL, Henri Dupont etc)</span>
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputMail2">Mail:</label>
+            <input type="mail" class="form-control" id="exampleInputMail2" placeholder="Entrer son adresse mail"> 
+            <span class="help-block">Entrez son adresse mail ici</span>
+          </div>
+          <div class="form-group">
+           <button type="button" class="btn btn-success setName"><span class="glyphicon glyphicon-floppy-disk" style="margin-right: 10px; font-size: x-large; vertical-align: middle;"></span>Enregistrer</button>
+          </div>
+        </form>
 
       </div>
       
@@ -98,9 +133,10 @@
         <div class="page-header">
            <h1>Choisissez le projet affilié</h1>    
         </div>
+
         <div class="btn-group">
-          <button type="button" class="btn btn-default" onclick="createProj()">Créer un nouveau projet</button>
-          <button type="button" class="btn btn-default" onclick="displayProjList()">Choisir un projet existant</button>
+          <button type="button" id="createProj" class="btn btn-default">Créer un nouveau projet</button>
+          <button type="button" id="chooseProj" class="btn btn-default">Choisir un projet existant</button>
         </div>
         <div id='selectProj' class="btn-group hide">
           <button type="button" class="btn btn-primary">Project List</button>
@@ -111,6 +147,20 @@
           <ul class="dropdown-menu myList" id="projList" role="menu">
           </ul>
         </div>
+
+        <div id="projForm" class="formStyle">
+          <form class="form-inline createProj hide" role="form">
+           <div class="form-group">
+             <label class="sr-only" for="createProjInput">Projet</label>
+             <input type="text" class="form-control login" id="createProjInput" placeholder="Entrer le nom du projet"> 
+             <span class="help-block">Entrez un nom de projet qui sera visible à l'ouverture de la liste déroulante dans l'authentification à l'application  (ex:Santiago de Chile)</span>
+            </div>
+          <div class="form-group">
+           <button type="button" class="btn btn-success setProj"><span class="glyphicon glyphicon-floppy-disk" style="margin-right: 10px; font-size: x-large; vertical-align: middle;"></span>Enregistrer</button>
+          </div>
+          </form>
+        </div>
+
       </div>
 
 
@@ -199,6 +249,7 @@
       </div>
 
     </div>
+
 
     <div id="footer">
       <div class="container">

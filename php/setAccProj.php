@@ -9,14 +9,17 @@ $tsql = "SELECT * FROM  [usersSYG].[dbo].[Proj_Accounts] WHERE AccountsID = ? AN
 //print_r($value[ProjID]);
 $stmt = sqlsrv_query($conn, $tsql, $params);
 if( $stmt === false ) {
-     //echo 1;
      die( print_r( sqlsrv_errors(), true));
 }
 
 if(sqlsrv_has_rows($stmt)){ 
 	$row = sqlsrv_fetch_array( $stmt);
-	echo json_encode($row);
-	echo "This project already exists for this user, add a new role";
+	//print_r($row[0]);
+	$data = array("returnStatus" => "0",
+					"message" => "This project already exists for this user, add a new role",
+					"projAccID" => $row[0]);
+	echo json_encode($data);
+	//echo "This project already exists for this user, add a new role";
 }
 else
 {
@@ -29,8 +32,12 @@ else
 	else
 	{
 		sqlsrv_next_result($ressource); 
-		sqlsrv_fetch($ressource); 
-		echo json_encode(sqlsrv_get_field($ressource, 0)); 
+		sqlsrv_fetch($ressource);
+		$data = array("returnStatus" => "200",
+						"message" => "Project linked to user",
+						"projAccID" => sqlsrv_get_field($ressource, 0)); 
+		//echo json_encode(sqlsrv_get_field($ressource, 0));
+		echo json_encode($data); 
 	}
 
 

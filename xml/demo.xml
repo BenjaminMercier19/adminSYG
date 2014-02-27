@@ -29,14 +29,18 @@
     
     <map id="Map" attributionvisible="false" esrilogovisible="false" openhandcursorvisible="false" scalebarvisible="true" scalebar="metric" zoomslidervisible="false" wraparound180="true" addarcgisbasemaps="true" wkid="102100" initialextent="" fullextent="-20033368,-25557230,20033368, 25557230" top="40" portalurl="https://www.arcgis.com">
         <operationallayers>
-           <layer id="HoleInEdition" label="HoleInEdition" type="feature" visible="true" alpha="1.0" popupconfig="popups/PopUp_Hole.xml" url=""/>
-           <layer id="HoleValidated" label="HoleValidated" type="feature" visible="true" alpha="1.0" popupconfig="popups/PopUp_Hole.xml" url=""/>
+           <layer id="HoleInEdition" label="HoleInEdition" type="feature" visible="true" alpha="1.0" popupconfig="popups/PopUp_Hole.xml" url=""
+		    token="k2uHZX-tEvYHzxO_41HyaEXULAPwRM8Roet941errHLEBB7ro_-naMfQsPi4siHm"/>
+           <layer id="HoleValidated" label="HoleValidated" type="feature" visible="true" alpha="1.0" popupconfig="popups/PopUp_Hole.xml" url=""
+		    token="k2uHZX-tEvYHzxO_41HyaEXULAPwRM8Roet941errHLEBB7ro_-naMfQsPi4siHm"/>
        </operationallayers>
     </map>
 
     <widgetcontainer layout="float">
-        <widget label="Search" left="80" top="280" icon="assets/images/i_search.png" config="widgets/SearchWidget/SearchWidget_LOCA.xml" url="widgets/SearchWidget/SearchWidget.swf"/>
-        <widget label="Print" left="390" top="400" icon="assets/images/i_print.png" config="widgets/Print/PrintWidget.xml" url="widgets/Print/PrintWidget.swf"/>
+        <widget label="Search" left="80" top="280" icon="assets/images/i_search.png" config="widgets/SearchWidget/SearchWidget_LOCA.xml" url="widgets/SearchWidget/SearchWidget.swf"
+		 token="k2uHZX-tEvYHzxO_41HyaEXULAPwRM8Roet941errHLEBB7ro_-naMfQsPi4siHm"/>
+        <widget label="Print" left="390" top="400" icon="assets/images/i_print.png" config="widgets/Print/PrintWidget.xml" url="widgets/Print/PrintWidget.swf"
+		 token="k2uHZX-tEvYHzxO_41HyaEXULAPwRM8Roet941errHLEBB7ro_-naMfQsPi4siHm"/>
         <widget label="Layer List" icon="assets/images/i_layers.png" config="widgets/LayerList/LayerListWidget.xml" url="widgets/LayerList/LayerListWidget.swf"/>   
     </widgetcontainer>
     

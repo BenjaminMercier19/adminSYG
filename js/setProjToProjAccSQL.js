@@ -1,8 +1,7 @@
 function saveInProjAcc(id, value)
 {
 	localStorage.setItem('projID',id);
-	var myAlert = document.createElement("div");
-	myAlert.setAttribute('style','z-index:1000;');
+	
 	$.ajax({
 		type:"POST",
 		data: {accountsID:localStorage.getItem("accountsID"),projectID:id},
@@ -10,20 +9,21 @@ function saveInProjAcc(id, value)
 		url:"php/setAccProj.php",
 		success: function(data,textStatus,jqXHR)
 		{
-			myAlert.className = "alert alert-dismissable alert-success fade";
-			myAlert.innerHTML += "<strong>Success</strong> Project add to user";
-		},
-		error: function(xhr, ajaxOptions, thrownError)
-		{   
+			var myAlert = document.createElement("div");
+			myAlert.setAttribute('style','z-index:1000;');
+			if(data.returnStatus != 200)
+			{
+				myAlert.className = "alert alert-dismissable alert-warning fade";
+				myAlert.innerHTML += "<strong>Warning!</strong>  " + data.message;
+				
+			}
+			else
+			{
+				myAlert.className = "alert alert-dismissable alert-success fade";
+				myAlert.innerHTML += "<strong>Success</strong> Project add to user";
+			}
 
-			myAlert.className = "alert alert-dismissable alert-warning fade";
-			myAlert.innerHTML += "<strong>Warning!</strong>  " + _.string.words((xhr.responseText).toString(),"}")[1];
-			var str = _.string.words((xhr.responseText).toString(),"}")[0] + "}";
-			var jsonObj = JSON.parse(str);
-			localStorage.setItem('projAccID', jsonObj.ProjAccID);
-		},
-		complete: function()
-		{
+			localStorage.setItem('projAccID', data.projAccID);
 			$('#progressBar').width("30%");		
 			$('#progressBar').attr("aria-valuenow","30");
 
@@ -44,9 +44,12 @@ function saveInProjAcc(id, value)
 			myAlert.className += " in";
 
 			setTimeout(function(){myAlert.className.replace(/\bin\b/,''); myAlert.className+='out'; myAlert.parentNode.removeChild(myAlert)}, 3000);
-			$('.sumUp .Project').append('<span>' + value + '<span>');
-			$('.sumUp .Project').append('<br />');
+			
+			$('.Project').innerHTML = '<span>' + value + '</span>';
 			$('#step3').removeClass("hide");
+		},
+		error: function(e){
+			   alert(e.responseText);
 		}
 	});
 }

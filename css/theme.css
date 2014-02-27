@@ -54,21 +54,31 @@ html
   margin-top: 60px;
 }
 
-#addForm
+.form-group
 {
   margin: 20px 0;
 }
 
-#addForm input
+.formStyle .form-group
+{
+  vertical-align: top;
+}
+
+.formStyle input .
 {
   width: 200px;
 }
 
-#addForm span
+.formStyle button
 {
-  margin-bottom: 10px;
+  width: auto;
 }
-#addForm select
+
+.formStyle span.help-block
+{
+  width: 200px;
+}
+.formStyle select
 {
   width: 200px;
   margin-bottom: 10px;

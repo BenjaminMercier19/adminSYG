@@ -1,6 +1,9 @@
 function displayUserForm()
 {
 	//lancer le script PHP pour avoir la liste des users
+	$('#progressBar').width("0%");		
+	$('#progressBar').attr("aria-valuenow","0");
+	$('#addForm').addClass('hide');
 	$("#loader").show();
 	$select = $('#myList');
 	$.ajax({
@@ -64,7 +67,6 @@ function createUser()
 	$('#progressBar').attr("aria-valuenow","0");
 	$('#selectPeople').addClass('hide');
 	$('#addForm').removeClass('hide');
-	//$('#selectPeople').addClass('hide');
 	
 }
 
