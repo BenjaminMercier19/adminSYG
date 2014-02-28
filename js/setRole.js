@@ -72,7 +72,7 @@ function setRole(e)
 			$('#progressBar').attr("aria-valuenow","50");
 
 			$html = '<span class="glyphicon glyphicon-info-sign"></span>';
-			$html +="<a href='"+data.config+"' target='_blank' class='alert-link'>"+data.config+"</a>";
+			$html +="<span><a href='"+data.config+"' target='_blank' class='alert-link'>"+data.config+"</a></span>";
 			$('.Config')[0].innerHTML = $html; 
 			
 

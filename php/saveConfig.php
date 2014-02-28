@@ -10,9 +10,16 @@
 	$ymin = $_POST["ymin"];
 	$xmax = $_POST["xmax"];
 	$ymax = $_POST["ymax"];
-	
+	$title = $_POST["title"];
+	$subtitle = $_POST["subTitle"];
+	$respoName = $_POST["respoName"];
+	$respoMail = $_POST["responMail"];
+	$standard = $_POST["standard"];
+
 	$arrConf = explode("info/",$config);
-	$filename = dirname(dirname( dirname(__FILE__)))."\\config\\".$arrConf[1];
+	//arrConf[1]replace / par \
+	$arrConf[1] = str_replace('\\', '/', $arrConf[1]); 
+	$filename = dirname(dirname( dirname(__FILE__)))."\\".$arrConf[1];
 
 	if (dirname(dirname(__FILE__))."\xml\demo.xml") {
     	
@@ -116,29 +123,32 @@
 		}
 
 		//TODO set Title, Subtitle, GrainStandard and Responsable
-		$xml->save($filename);
-		//$xml->save(dirname(dirname(dirname(__FILE__))).'\config\test.xml');
-
-		//Cas où il n'y a pas de balise layers 
-		/*else
+		if($xml -> getElementsByTagName('name') -> length > 0)
 		{
-			$opLayers = $xml -> getElementsByTagName('operationallayers') ;
-			if($opLayers->length > 0)
-			{
-				//Création des tag <layer>
-				createLayers($xml);
+			$xml -> getElementsByTagName('name') -> item(0) -> nodeValue = $respoName;
+		}
 
-			}
-			//Cas où il n'y a pas de balise operationallayers
-			else
-			{
-				$map = $xml -> getElementsByTagName('map') ;
-				echo "map".($map -> length);
-			}
-			//TODO test si opLayers existe - sinon test si map existe sinon...
-		}*/
+		if($xml -> getElementsByTagName('title') -> length > 0)
+		{
+			$xml -> getElementsByTagName('title') -> item(0) -> nodeValue = $title;
+		}
 
+		if($xml -> getElementsByTagName('subtitle') -> length > 0)
+		{
+			$xml -> getElementsByTagName('subtitle') -> item(0) -> nodeValue = $subtitle;
+		}
+
+		if($xml -> getElementsByTagName('mail') -> length > 0)
+		{
+			$xml -> getElementsByTagName('mail') -> item(0) -> nodeValue = $respoMail;
+		}
+
+		if($xml -> getElementsByTagName('GrainStandard') -> length > 0)
+		{
+			$xml -> getElementsByTagName('GrainStandard') -> item(0) -> nodeValue = $standard;
+		}
 		
+		$xml->save($filename);
 	}
 	//Cas où le fichier n'extiste pas 
 	else 
@@ -146,7 +156,7 @@
 	    echo "Le fichier $filename n'existe pas.";
 	}
 
-	function createLayers($xml)
+	/*function createLayers($xml)
 	{
 		$newLayer = $xml -> createElement("layer");
 		$newLayer -> setAttribute("id", "HoleInEdition");
@@ -168,5 +178,5 @@
 
 		$xml -> getElementsByTagName('operationallayers') -> item(0) -> appendChild($newLayer);
 		$xml -> getElementsByTagName('operationallayers') -> item(0) -> appendChild($newLayerBis);
-	}
+	}*/
 ?>

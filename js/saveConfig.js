@@ -32,7 +32,13 @@ function saveConfig()
 			xmin: localStorage.getItem("xmin"),
 			ymin: localStorage.getItem("ymin"),
 			xmax: localStorage.getItem("xmax"),
-			ymax: localStorage.getItem("ymax")
+			ymax: localStorage.getItem("ymax"),
+			title: $("#titleConfig").val(),
+			subTitle: $("#subTitleConfig").val(),
+			respoName: ($('.Role span').eq(1).text() == "Prestataire")? $("#respoName").val() : null,
+			responMail: ($('.Role span').eq(1).text() == "Prestataire")? $("#inputError2").val():null,
+			standard: $("#selectbasic").val(),
+			//TODO: Rajouterle select GrainAnalysis
 		};
 
 		$.ajax({

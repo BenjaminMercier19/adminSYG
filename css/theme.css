@@ -116,7 +116,7 @@ html
   transition: opacity .15s linear;
 }
 
-.sumUp:hover span{
+.sumUp:hover span.glyphicon-th-large{
   -webkit-transform: rotate(360deg);
   -webkit-transform: rotate(360deg);
   -moz-transform: rotate(360deg);
