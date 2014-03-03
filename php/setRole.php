@@ -14,9 +14,9 @@ if(!is_dir($folderLev2))
 	if ($result == 1) {
 		setRole();
 	} else {
-	    $data["returnStatus"] = 0;
-	    $data["message"] = "The folder has not been created at: " . $folderLev2;
-	    echo json_encode($data);
+		$data["returnStatus"] = 0;
+		$data["message"] = "The folder has not been created at: " . $folderLev2;
+		echo json_encode($data);
 	}
 }
 else
@@ -30,10 +30,10 @@ function setRole()
 	$tsql = "SELECT * FROM  [usersSYG].[dbo].[RolesSYG] WHERE roleName LIKE ? AND projAccID = ?";
 	$stmt = sqlsrv_query($conn, $tsql, $params);
 	if( $stmt === false ) {
-		 $data["returnStatus"] = 3;
-	   	 $data["message"] = "Connexion impossible à la table RolesSYG";
-	   	 echo json_encode($data);
-	     //die( print_r( sqlsrv_errors(), true));
+		$data["returnStatus"] = 3;
+		$data["message"] = "Connexion impossible à la table RolesSYG";
+		echo json_encode($data);
+	    //die( print_r( sqlsrv_errors(), true));
 	}
 	
 	if(sqlsrv_has_rows($stmt)){ 

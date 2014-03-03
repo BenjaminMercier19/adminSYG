@@ -143,7 +143,7 @@ function addUserInDB()
 			//echo json_encode(sqlsrv_get_field($ressource, 0)); 
 		}
 		echo json_encode($data);
-		sqlsrv_free_stmt($ressourcePWD);    
+		//sqlsrv_free_stmt($ressourcePWD);    
 		
 	}
 	sqlsrv_free_stmt($ressource);    

@@ -64,6 +64,11 @@ function displayServicesList(token)
 		success: function(data,textStatus,jqXHR)
 		{
 			$("#step4").removeClass("hide");
+			$('#progressBar').width("75%");		
+			$('#progressBar').attr("aria-valuenow","75");
+			$('.pt-page-current').animate({
+		        scrollTop: $("#step4").offset().top
+		    }, 600);
 			if($('.Role span').eq(1).text() == "Prestataire")
 			{
 				$("#respoName").removeClass("hide");
@@ -143,12 +148,10 @@ function updateValues(e)
 	if(e.currentTarget)
 	{
 		if ( $('#'+e.currentTarget.parentElement.id+' ul > *').length > 0 ) {
-	    	//alert('added');
 	    	$('#'+e.currentTarget.parentElement.id+' ul').removeClass('connected');
 		}
 		else
 		{
-	    	//alert('removed1');
 	    	$('#'+e.currentTarget.parentElement.id+' ul').addClass('connected');
 		}
 	}

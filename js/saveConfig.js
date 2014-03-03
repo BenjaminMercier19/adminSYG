@@ -49,6 +49,8 @@ function saveConfig()
 			success: function(data,textStatus,jqXHR)
 			{
 				alert("success");
+				$('#progressBar').width("100%");		
+				$('#progressBar').attr("aria-valuenow","100");
 			},
 			error: function(e){
 			   //if there is an error append a 'none available' option

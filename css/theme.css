@@ -44,13 +44,15 @@ html
 {
   min-height: 100%;
   height: auto;
-  margin: 0 auto -60px;
+  margin: 0 0 -60px;
   padding: 0 0 60px;
 }
 
 #footer
 {
   height: 60px;
+  right: 20%;
+  position: absolute;
   bottom: 3px;
   margin-top: 60px;
 }
@@ -87,6 +89,7 @@ html
 
 .sumUp
 {
+  width:19%;
   position: fixed;
   background-image: -webkit-linear-gradient(top,#428bca 0,#2d6ca2 100%);
   background-image: linear-gradient(to bottom,#428bca 0,#2d6ca2 100%);

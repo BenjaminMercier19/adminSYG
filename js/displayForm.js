@@ -48,7 +48,7 @@ function populateUserList(data, textStatus, jqXHR)
 		$.each(data, function(key, val){
 	    	var value = JSON.stringify(val);
 	    	value = value.replace(/"/g,'&quot;');
-	      	$select.append("<li><a onClick=\"displayProj('"+ value + "')\" id=\"'" + val.accountsID + "'\">" + val.nom_prenom + "</a></li>");
+	      	$select.append("<li><a onClick=\"displayProj('"+ value + "')\" id=\"'" + val.accountsID + "'\">" + _.string.titleize(_.string.humanize(val.nom_prenom.toLowerCase())) + "</a></li>");
 	    });
 	    //localStorage.setitem('mail',val.mail);
 

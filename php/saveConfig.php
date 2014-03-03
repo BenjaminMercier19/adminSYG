@@ -36,13 +36,13 @@
 				{
 					$layer -> removeAttribute('url');
 	        		$layer -> setAttribute("url", $holeEdit);
-					echo $layer -> getAttribute('url'); 
+					//echo $layer -> getAttribute('url'); 
 				}
 				else if($layer -> getAttribute('id') == "HoleValidated")
 				{
 					$layer -> removeAttribute('url');
 	        		$layer -> setAttribute("url", $holeValid);
-					echo $layer -> getAttribute('url'); 
+					//echo $layer -> getAttribute('url'); 
 				}
 			}
 		}

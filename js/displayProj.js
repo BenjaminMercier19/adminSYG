@@ -14,10 +14,14 @@ function displayProj(data)
     localStorage.setItem('accountsID', value.accountsID);
 	localStorage.setItem('logon', value.logon);
 	localStorage.setItem('mail', value.mail);
-	$('#progressBar').width("15%");		
-	$('#progressBar').attr("aria-valuenow","15");
+	$('#progressBar').width("25%");		
+	$('#progressBar').attr("aria-valuenow","25");
 
 	$('#step2').removeClass("hide");
+	$('.pt-page-current').animate({
+        scrollTop: $("#step2").offset().top
+    }, 600);	
+
 
 	$html = '<span class="glyphicon glyphicon-user"></span>';
 	$html += '<span>' + _.string.titleize(_.string.humanize(value.nom_prenom)) + '</span>';
@@ -119,8 +123,8 @@ function saveProj()
 					myAlert.innerHTML += "<strong>Success</strong> Project add to user";
 					localStorage.setItem('projAccID', data.projAccID);
 					localStorage.setItem('projID', data.projID);
-					$('#progressBar').width("30%");		
-					$('#progressBar').attr("aria-valuenow","30");
+					$('#progressBar').width("50%");		
+					$('#progressBar').attr("aria-valuenow","50");
 
 					$html = '<span class="glyphicon glyphicon-road"></span>';
 					$html +='<span>' + data.projName + '</span>';

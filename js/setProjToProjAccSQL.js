@@ -24,8 +24,8 @@ function saveInProjAcc(id, value)
 			}
 
 			localStorage.setItem('projAccID', data.projAccID);
-			$('#progressBar').width("30%");		
-			$('#progressBar').attr("aria-valuenow","30");
+			$('#progressBar').width("50%");		
+			$('#progressBar').attr("aria-valuenow","50");
 
 			var myBut = document.createElement("button");
 			myBut.setAttribute('type','button');
@@ -49,6 +49,9 @@ function saveInProjAcc(id, value)
 			$html +='<span>' + value + '</span>';
 			$('.Project')[0].innerHTML = $html;
 			$('#step3').removeClass("hide");
+			$('.pt-page-current').animate({
+		        scrollTop: $("#step3").offset().top
+		    }, 600);
 		},
 		error: function(e){
 			   alert(e.responseText);

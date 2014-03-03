@@ -7,9 +7,9 @@
           <!-- Bootstrap theme -->
       <link href="libs/css/bootstrap-theme.min.css" rel="stylesheet">
       <link href="css/theme.css" rel="stylesheet">
-      <style type="text/css"></style>
-      <style type="text/css"></style>
-      <style id="holderjs-style" type="text/css"></style>
+      <link rel="stylesheet" type="text/css" href="css/component.css" />
+      <link rel="stylesheet" type="text/css" href="css/animations.css" />
+     
   </head>
 
   <body role="document">
@@ -18,7 +18,9 @@
     <script type="text/javascript" src="libs/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="libs/js/jquery.sortable.min.js"></script>
     <script type="text/javascript" src="libs/js/jquery-ui-1.10.4.custom.min.js"></script>
-    
+    <script type="text/javascript" src="libs/js/jquery-ui-1.10.4.custom.min effect.js"></script>
+   
+    <script src="libs/js/modernizr.custom.js"></script>
 
     <script type="text/javascript" src="libs/js/underscore.string.min.js"></script>                    
     <script type="text/javascript" src="js/loading.js"></script>
@@ -28,7 +30,7 @@
     <script type="text/javascript" src="js/setRole.js"></script>  
     <script type="text/javascript" src="js/servicesAndLayers.js"></script> 
     <script type="text/javascript" src="js/saveConfig.js"></script>  
-    <script type="text/javascript" src="js/saveName.js"></script>  
+    <script type="text/javascript" src="js/saveName.js"></script> 
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
@@ -41,244 +43,251 @@
           </button>
           <a class="navbar-brand" href="#">adminTerraGIS</a>
         </div>
-        <div class="navbar-collapse collapse">
+        <div id="myNav" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#footer">Contact</a></li>
+            <li data-animation="0" class="active"><a href="#">Nouvel Configuration</a></li>
+            <li data-animation="1"><a href="#">Toutes les configurations</a></li>
+            <li data-animation="2"><a href="#">Contact</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
 
     <div class="sumUp">
-      <h2><span class="glyphicon glyphicon-th-large"></span>Résumé</h2>
-      <div class="User"></div>
-      <div class="Project"></div>
-      <div class="Role"></div>
-      <div class="Config"></div>
-      <div class="Service"></div>
+        <h2><span class="glyphicon glyphicon-th-large"></span>Résumé</h2>
+        <div class="User"></div>
+        <div class="Project"></div>
+        <div class="Role"></div>
+        <div class="Config"></div>
+        <div class="Service"></div>
     </div>
 
-    <div class="container theme-showcase page" id="Home" role="main">
-      <div class="page-header">
-         <h1>Choisissez le type d'utilisateur</h1>    
-      </div>
-     
-      <div class="btn-group">
-        <button type="button" id="addUserBut" class="btn btn-default">Ajouter un nouvel utilisateur</button>
-        <button type="button" id="chooseUserBut" class="btn btn-default">Choisir un utilisateur existant</button>
-      </div>
-      <img src='assets/images/ajax-loader.gif' id='loader' style='display:none;' alt='loading...' />
-
-      <div id='selectPeople' class="btn-group hide">
-        <button type="button" class="btn btn-primary">User List</button>
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-          <span class="sr-only">User List</span>
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" id="myList" role="menu">
-        </ul>
-      </div>
-      
-      <div id="addForm" class="hide formStyle">
-
-        <span>Cette personne a-t-elle un compte SYSTRA?
-          <select id="ldap" class="form-control">
-            <option value="1">Oui</option>
-            <option value="0" selected>Non</option>
-          </select>
-        </span>
-
-        <form class="form-inline withLdap hide" role="form">
-          <div class="form-group">
-            <label class="sr-only" for="exampleInputlogin1">Login</label>
-            <input type="text" class="form-control login" id="exampleInputlogin1" placeholder="Entrer le login ici"> 
-            <span class="help-block">Pour cette personne de SYSTRA, entrez ici son login windows (ex:bmercier1)</span>
+    <div id="pt-main" class="pt-perspective">
+      <div class="pt-page pt-page-1">
+        <div class="container theme-showcase page" role="main">
+          <div class="page-header">
+             <h1>Choisissez le type d'utilisateur</h1>    
           </div>
-          <div class="form-group">
-           <button type="button" class="btn btn-success setName"><span class="glyphicon glyphicon-floppy-disk" style="margin-right: 10px; font-size: x-large; vertical-align: middle;"></span>Enregistrer</button>
+         
+          <div class="btn-group">
+            <button type="button" id="addUserBut" class="btn btn-default">Ajouter un nouvel utilisateur</button>
+            <button type="button" id="chooseUserBut" class="btn btn-default">Choisir un utilisateur existant</button>
           </div>
-        </form>
+          <img src='assets/images/ajax-loader.gif' id='loader' style='display:none;' alt='loading...' />
 
-        <form class="form-inline withoutLdap" role="form">
-          <div class="form-group">
-            <label class="sr-only" for="exampleInputlogin2">Login</label>
-            <input type="text" class="form-control login" id="exampleInputlogin2" placeholder="Entrer le login ici"> 
-            <span class="help-block">Pour cette personne entrez le login que vous voulez lui attribuer dans l'application</span>
+          <div id='selectPeople' class="btn-group hide">
+            <button type="button" class="btn btn-primary">User List</button>
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+              <span class="sr-only">User List</span>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" id="myList" role="menu">
+            </ul>
           </div>
-          <div class="form-group">
-            <label class="sr-only" for="exampleInputPWD2">Mot de passe</label>
-            <input type="text" class="form-control" id="exampleInputPWD2" placeholder="Entrer un mot de passe"> 
-            <span class="help-block">Pour cette personne entrez le mot de passe que vous voulez lui attribuer dans l'application</span>
-          </div>
-          <div class="form-group">
-            <label class="sr-only" for="exampleInputNom_Prenom2">Nom et/ou prénom à afficher</label>
-            <input type="text" class="form-control" id="exampleInputNom_Prenom2" placeholder="Entrer prénom et nom"> 
-            <span class="help-block">Pour cette personne entrez un nom et/ou prénom (ex: prestataire Baku, SOBESOL, Henri Dupont etc)</span>
-          </div>
-          <div class="form-group">
-            <label class="sr-only" for="exampleInputMail2">Mail:</label>
-            <input type="mail" class="form-control" id="exampleInputMail2" placeholder="Entrer son adresse mail"> 
-            <span class="help-block">Entrez son adresse mail ici</span>
-          </div>
-          <div class="form-group">
-           <button type="button" class="btn btn-success setName"><span class="glyphicon glyphicon-floppy-disk" style="margin-right: 10px; font-size: x-large; vertical-align: middle;"></span>Enregistrer</button>
-          </div>
-        </form>
+          
+          <div id="addForm" class="hide formStyle">
 
-      </div>
-      
-      <div id="step2" class="hide"> 
-        <div class="page-header">
-           <h1>Choisissez le projet affilié</h1>    
-        </div>
+            <span>Cette personne a-t-elle un compte SYSTRA?
+              <select id="ldap" class="form-control">
+                <option value="1">Oui</option>
+                <option value="0" selected>Non</option>
+              </select>
+            </span>
 
-        <div class="btn-group">
-          <button type="button" id="createProj" class="btn btn-default">Créer un nouveau projet</button>
-          <button type="button" id="chooseProj" class="btn btn-default">Choisir un projet existant</button>
-        </div>
-        <div id='selectProj' class="btn-group hide">
-          <button type="button" class="btn btn-primary">Project List</button>
-          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-            <span class="sr-only">User List</span>
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu myList" id="projList" role="menu">
-          </ul>
-        </div>
+            <form class="form-inline withLdap hide" role="form">
+              <div class="form-group">
+                <label class="sr-only" for="exampleInputlogin1">Login</label>
+                <input type="text" class="form-control login" id="exampleInputlogin1" placeholder="Entrer le login ici"> 
+                <span class="help-block">Pour cette personne de SYSTRA, entrez ici son login windows (ex:bmercier1)</span>
+              </div>
+              <div class="form-group">
+               <button type="button" class="btn btn-success setName"><span class="glyphicon glyphicon-floppy-disk" style="margin-right: 10px; font-size: x-large; vertical-align: middle;"></span>Enregistrer</button>
+              </div>
+            </form>
 
-        <div id="projForm" class="formStyle">
-          <form class="form-inline createProj hide" role="form">
-           <div class="form-group">
-             <label class="sr-only" for="createProjInput">Projet</label>
-             <input type="text" class="form-control login" id="createProjInput" placeholder="Entrer le nom du projet"> 
-             <span class="help-block">Entrez un nom de projet qui sera visible à l'ouverture de la liste déroulante dans l'authentification à l'application  (ex:Santiago de Chile)</span>
+            <form class="form-inline withoutLdap" role="form">
+              <div class="form-group">
+                <label class="sr-only" for="exampleInputlogin2">Login</label>
+                <input type="text" class="form-control login" id="exampleInputlogin2" placeholder="Entrer le login ici"> 
+                <span class="help-block">Pour cette personne entrez le login que vous voulez lui attribuer dans l'application</span>
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="exampleInputPWD2">Mot de passe</label>
+                <input type="text" class="form-control" id="exampleInputPWD2" placeholder="Entrer un mot de passe"> 
+                <span class="help-block">Pour cette personne entrez le mot de passe que vous voulez lui attribuer dans l'application</span>
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="exampleInputNom_Prenom2">Nom et/ou prénom à afficher</label>
+                <input type="text" class="form-control" id="exampleInputNom_Prenom2" placeholder="Entrer prénom et nom"> 
+                <span class="help-block">Pour cette personne entrez un nom et/ou prénom (ex: prestataire Baku, SOBESOL, Henri Dupont etc)</span>
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="exampleInputMail2">Mail:</label>
+                <input type="mail" class="form-control" id="exampleInputMail2" placeholder="Entrer son adresse mail"> 
+                <span class="help-block">Entrez son adresse mail ici</span>
+              </div>
+              <div class="form-group">
+               <button type="button" class="btn btn-success setName"><span class="glyphicon glyphicon-floppy-disk" style="margin-right: 10px; font-size: x-large; vertical-align: middle;"></span>Enregistrer</button>
+              </div>
+            </form>
+
+          </div>
+          
+          <div id="step2" class="hide"> 
+            <div class="page-header">
+               <h1>Choisissez le projet affilié</h1>    
             </div>
-          <div class="form-group">
-           <button type="button" class="btn btn-success setProj"><span class="glyphicon glyphicon-floppy-disk" style="margin-right: 10px; font-size: x-large; vertical-align: middle;"></span>Enregistrer</button>
-          </div>
-          </form>
-        </div>
 
-      </div>
+            <div class="btn-group">
+              <button type="button" id="createProj" class="btn btn-default">Créer un nouveau projet</button>
+              <button type="button" id="chooseProj" class="btn btn-default">Choisir un projet existant</button>
+            </div>
+            <div id='selectProj' class="btn-group hide">
+              <button type="button" class="btn btn-primary">Project List</button>
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <span class="sr-only">User List</span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu myList" id="projList" role="menu">
+              </ul>
+            </div>
 
-
-      <div id="step3" class="hide"> 
-        <div class="page-header">
-           <h1>Choisissez le rôle</h1>    
-        </div>
-        <div id='selectRole' class="btn-group">
-          <button type="button" class="btn btn-primary">Role List</button>
-          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-            <span class="sr-only">User role</span>
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu myList" id="roleList" role="menu">
-            <li><a id="Validateur">Validateur</a></li>
-            <li><a id="Prestataire">Prestataire</a></li>
-            <li><a id="Client">Client</a></li>
-          </ul>
-        </div>
-      </div>
-
-
-      <div id="step4" class="hide"> 
-        <div class="page-header">
-           <h1>Choisissez les services</h1>    
-        </div>
-
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <div id='selectService' class="btn-group">
-                  <button type="button" class="btn btn-primary">Services List</button>
-                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                    <span class="sr-only">Services List</span>
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu myList" id="serviceList" role="menu"></ul>
-                </div> 
-              </td>
-              <td>
-                <div id='selectLayer' class="btn-group">
-                  <button type="button"data-toggle="tooltip" data-placement="top" title="Choose a Service to display those layers" class="btn btn-primary"><span class="    glyphicon glyphicon-move" style="margin-right: 7px;"></span>Layers List</button>   
-                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">  
-                    <span class="sr-only">Layers List</span>    
-                    <span class="caret"></span>   
-                  </button>   
-                  <ul class ="dropdown-menu source connected" id="layersList" role="menu"></ul> 
+            <div id="projForm" class="formStyle">
+              <form class="form-inline createProj hide" role="form">
+               <div class="form-group">
+                 <label class="sr-only" for="createProjInput">Projet</label>
+                 <input type="text" class="form-control login" id="createProjInput" placeholder="Entrer le nom du projet"> 
+                 <span class="help-block">Entrez un nom de projet qui sera visible à l'ouverture de la liste déroulante dans l'authentification à l'application  (ex:Santiago de Chile)</span>
                 </div>
-              </td> 
-              <td>
-                <div id='dropZone' class="dropZone btn-group">  
-                  <span class="glyphicon glyphicon-edit"></span>Drop here "hole in edition" layer<ul class="target connected"></ul> 
-                </div> 
-              </td> 
-              <td>
-                <div id='dropZoneBis' class="dropZone btn-group">   
-                  <span class="glyphicon glyphicon-eye-open"></span>Drop here "hole validated" layer<ul class="target connected"></ul>  
-                </div>
-              </td> 
-            </tr>
-            <tr>
-              <td>
-                 <input type="text" id='titleConfig' class="form-control" placeholder="Set title here">
-              </td>
-              <td>
-                 <input type="text" id='subTitleConfig' class="form-control" placeholder="Set subtitle here">
-              </td>
-              <td>
-                 <input id="respoName" type="email" class="form-control hide" placeholder="Set responsible name">
-              </td>
-              <td>
-                <div class="form-group has-feedback hide" id="respoMail">
-                  <input type="email" class="form-control" id="inputError2" placeholder="Set responsible mail">
-                  <span class="glyphicon glyphicon-envelope form-control-feedback" style="top: 0;"></span>
-                </div>
-              </td>
-            </tr>
-            <tr> 
-              <td>  
-                <div class="control-group">
-                  <label class="control-label" for="selectbasic">Select Grain Standard</label>
-                  <div class="controls">
-                    <select id="selectbasic" name="selectbasic" class="input-xlarge">
-                      <option value="American">American</option>
-                      <option value="English">English</option>
-                    </select>
-                    <p class="help-block" style="width:150px;text-align: left;">Choisissez le standard pour l'affiche des courbes granulométriques</p>
-                  </div>
-               </div>
-              </td>
-              <td>
-                <button type="button" id="setConfig"  class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk" style="margin-right: 10px; font-size: x-large; vertical-align: middle;"></span>Save Config</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+              <div class="form-group">
+               <button type="button" class="btn btn-success setProj"><span class="glyphicon glyphicon-floppy-disk" style="margin-right: 10px; font-size: x-large; vertical-align: middle;"></span>Enregistrer</button>
+              </div>
+              </form>
+            </div>
 
-
-    <!-- Small modal -->
-    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" id="myModal" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
           </div>
-          <div class="modal-header">
-            ...
+
+
+          <div id="step3" class="hide"> 
+            <div class="page-header">
+               <h1>Choisissez le rôle</h1>    
+            </div>
+            <div id='selectRole' class="btn-group">
+              <button type="button" class="btn btn-primary">Role List</button>
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <span class="sr-only">User role</span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu myList" id="roleList" role="menu">
+                <li><a id="Validateur">Validateur</a></li>
+                <li><a id="Prestataire">Prestataire</a></li>
+                <li><a id="Client">Client</a></li>
+              </ul>
+            </div>
+          </div>
+
+
+          <div id="step4" class="hide"> 
+            <div class="page-header">
+               <h1>Choisissez les services</h1>    
+            </div>
+
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <div id='selectService' class="btn-group">
+                      <button type="button" class="btn btn-primary">Services List</button>
+                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <span class="sr-only">Services List</span>
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu myList" id="serviceList" role="menu"></ul>
+                    </div> 
+                  </td>
+                  <td>
+                    <div id='selectLayer' class="btn-group">
+                      <button type="button"data-toggle="tooltip" data-placement="top" title="Choose a Service to display those layers" class="btn btn-primary"><span class="    glyphicon glyphicon-move" style="margin-right: 7px;"></span>Layers List</button>   
+                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">  
+                        <span class="sr-only">Layers List</span>    
+                        <span class="caret"></span>   
+                      </button>   
+                      <ul class ="dropdown-menu source connected" id="layersList" role="menu"></ul> 
+                    </div>
+                  </td> 
+                  <td>
+                    <div id='dropZone' class="dropZone btn-group">  
+                      <span class="glyphicon glyphicon-edit"></span>Drop here "hole in edition" layer<ul class="target connected"></ul> 
+                    </div> 
+                  </td> 
+                  <td>
+                    <div id='dropZoneBis' class="dropZone btn-group">   
+                      <span class="glyphicon glyphicon-eye-open"></span>Drop here "hole validated" layer<ul class="target connected"></ul>  
+                    </div>
+                  </td> 
+                </tr>
+                <tr>
+                  <td>
+                     <input type="text" id='titleConfig' class="form-control" placeholder="Set title here">
+                  </td>
+                  <td>
+                     <input type="text" id='subTitleConfig' class="form-control" placeholder="Set subtitle here">
+                  </td>
+                  <td>
+                     <input id="respoName" type="email" class="form-control hide" placeholder="Set responsible name">
+                  </td>
+                  <td>
+                    <div class="form-group has-feedback hide" id="respoMail">
+                      <input type="email" class="form-control" id="inputError2" placeholder="Set responsible mail">
+                      <span class="glyphicon glyphicon-envelope form-control-feedback" style="top: 0;"></span>
+                    </div>
+                  </td>
+                </tr>
+                <tr> 
+                  <td>  
+                    <div class="control-group">
+                      <label class="control-label" for="selectbasic">Select Grain Standard</label>
+                      <div class="controls">
+                        <select id="selectbasic" name="selectbasic" class="input-xlarge">
+                          <option value="American">American</option>
+                          <option value="English">English</option>
+                        </select>
+                        <p class="help-block" style="width:150px;text-align: left;">Choisissez le standard pour l'affiche des courbes granulométriques</p>
+                      </div>
+                   </div>
+                  </td>
+                  <td>
+                    <button type="button" id="setConfig"  class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk" style="margin-right: 10px; font-size: x-large; vertical-align: middle;"></span>Save Config</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+          <!-- Small modal -->
+          <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" id="myModal" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
+                </div>
+                <div class="modal-header">
+                  ...
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <div class="pt-page pt-page-2"><h1><span>A collection of</span><strong>Page2</strong> Transitions</h1></div>
+      <div class="pt-page pt-page-3"><h1><span>A collection of</span><strong>Page3</strong> Transitions</h1></div>
+      <div class="pt-page pt-page-4"><h1><span>A collection of</span><strong>Page4</strong> Transitions</h1></div>
+
+
     </div>
-
-
-    </div>
-
 
     <div id="footer">
       <div class="container">
