@@ -49,6 +49,9 @@ function saveInProjAcc(id, value)
 			$html +='<span>' + value + '</span>';
 			$('.Project')[0].innerHTML = $html;
 			$('#step3').removeClass("hide");
+			$('#step4').addClass("hide");
+			$('.Role').empty();
+			$('.Config').empty();
 			$('.pt-page-current').animate({
 		        scrollTop: $("#step3").offset().top
 		    }, 600);

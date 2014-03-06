@@ -1,28 +1,4 @@
-/*function getServicesListInConfig(url)
-{
-	var layers = [];
-
-	$.ajax({
-		type:"GET",
-		dataType:"xml",
-		url: url,
-		success: function(data,textStatus,jqXHR)
-		{
-			$(data).find('layer').each(function(){
-				var layer = {};
-				layer.id = $(this).attr('id');
-				layer.url = $(this).attr('url');
-				layers.push(layer);			
-			});
-		},
-		complete: function(){	
-
-			getToken();
-		}
-	});
-}*/
-
-function getToken()
+function getToken(callback)
 {
 	var token;
 	if (localStorage.getItem("token") == undefined)
@@ -35,63 +11,79 @@ function getToken()
 			url: "http://vwpfr010app134:6080/arcgis/tokens/generateToken",
 			success: function(data,textStatus,jqXHR)
 			{
-				//displayServicesList(data.token);
 				localStorage.setItem("token", data.token);
 				token = data.token;
+				alert(token);
+				callback(null, token);
+				//return token;
 			},
 			error: function()
-			{
-				alert("Impossible to connect the ArcGIS Server");
+			{alert("Impossible to connect the ArcGIS Server");
+				callback("Impossible to connect the ArcGIS Server", null);
+				//return false;
 			}
 		});
 	}
 	else
 	{
 		token = localStorage.getItem("token");
-		//displayServicesList(localStorage.getItem("token"));
+		callback(null, token);
 	}
-	return token;
+	
 }
 
-function displayServicesList(token)
+function displayServicesList()
 {
-
-	$.ajax({
-		type:"POST",
-		data:{token: token, f:"json"},
-		dataType:"json",
-		url: "https://sygdev.systra.info/arcgis/rest/services/SYG",
-		success: function(data,textStatus,jqXHR)
+	getToken(function(err, token)
+	{
+		if(!err)
 		{
-			$("#step4").removeClass("hide");
-			$('#progressBar').width("75%");		
-			$('#progressBar').attr("aria-valuenow","75");
-			$('.pt-page-current').animate({
-		        scrollTop: $("#step4").offset().top
-		    }, 600);
-			if($('.Role span').eq(1).text() == "Prestataire")
-			{
-				$("#respoName").removeClass("hide");
-				$("#respoMail").removeClass("hide");
-			}
+			$.ajax({
+				type:"POST",
+				data:{token: token, f:"json"},
+				dataType:"json",
+				url: "https://sygdev.systra.info/arcgis/rest/services/SYG",
+				success: function(data,textStatus,jqXHR)
+				{
+					$("#step4").removeClass("hide");
+					$('#progressBar').width("75%");		
+					$('#progressBar').attr("aria-valuenow","75");
+					$('.pt-page-current').animate({
+				        scrollTop: $("#step4").offset().top
+				    }, 600);
+					
+					if($('.Role span').eq(1).text() == "Prestataire")
+					{
+						$("#respoName").removeClass("hide");
+						$("#respoMail").removeClass("hide");
+					}
 
-			$serviceList = $('#serviceList');
-			$serviceList.html('');
-			$.each(data.services, function(key, val){
-		    	var value = JSON.stringify(val);
-		    	value = value.replace(/"/g,'&quot;');
-		    	//alert(value);
-		    	if(val.type == "MapServer")
-		    	{
-    		   		$serviceList.append("<li><a onClick=\"getLayerList('"+ value + "')\"  id=\"'" + val.name + "'\">" + val.name + "</a></li>");
-		    	}
-		    });
-		},
-		error: function()
+					$serviceList = $('#serviceList');
+					$serviceList.html('');
+					$.each(data.services, function(key, val){
+				    	var value = JSON.stringify(val);
+				    	value = value.replace(/"/g,'&quot;');
+				    	//alert(value);
+				    	if(val.type == "MapServer")
+				    	{
+		    		   		$serviceList.append("<li><a onClick=\"getLayerList('"+ value + "')\"  id=\"'" + val.name + "'\">" + val.name + "</a></li>");
+				    	}
+				    });
+				},
+				error: function()
+				{
+					alert("Impossible to get SYG services");
+				}
+			});
+		}
+		else
 		{
-			alert("Impossible to get SYG services");
+			alert(err);
 		}
 	});
+
+	
+
 }
 
 function getLayerList(value)

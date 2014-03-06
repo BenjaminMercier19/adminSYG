@@ -7,7 +7,6 @@ function onLoadHandler(e)
 {
 	//Set width of SumUp panel
 	var page = document.getElementsByClassName('page')[0];
-	/*$('.sumUp').width(getComputedStyle(page, null).marginRight);*/
 	
 	//Set listener for user menu
     $("#addUserBut").on("click", createUser);
@@ -46,14 +45,22 @@ function onLoadHandler(e)
 
 	//Set listener for Role
 	$("#roleList li").on('click', setRole);
-	/*$("#Validateur").on('click', setRole(this.id));
-	$("#Prestataire").on('click', setRole(this.id));
-	$("#Client").on('click', setRole(this.id));*/
 
 
     //Set listenr for saving config file
 	$("#setConfig").on('click', saveConfig);
 
+
+	$("#launchTree").on('click', function(e)
+		{
+			getTree(fillTree);
+		});
+	$("#refreshTree").on('click', function(e)
+		{
+			getTree(refreshTree);
+		});
+
+	
 
 	/*
 	*
@@ -67,6 +74,7 @@ function onLoadHandler(e)
 	*
 	*
 	*/
+	
 	var PageTransitions = (function() {
 
 	var $main = $( '#pt-main' ),
@@ -102,19 +110,20 @@ function onLoadHandler(e)
 				if(!isAnimating)
 				{
 					el.preventDefault();
-					if(($(el.currentTarget).find('a').eq(0).text() == "Nouvel Configuration") || $old == "Nouvel Configuration")
-					{
-						$(".sumUp").animate({
-							right: parseInt($(".sumUp").css('right'),10) == 0 ? $("#pt-main").css('width'):0
-					    }, 600, "easeOutQuad");
-					    $("#footer").animate({
-							right: parseInt($(".sumUp").css('right'),10) == 0 ? $("#pt-main").css('width'):'20%'
-					    }, 600, "easeOutQuad");
-						//.fadeOut(200, null)
-					}
-					$old = $(el.currentTarget).find('a').eq(0).text();
 					if(!$(el.currentTarget).hasClass("active"))
-					{	
+					{
+						if(($(el.currentTarget).find('a').eq(0).text() == "Nouvel Configuration") || $old == "Nouvel Configuration")
+						{
+							$(".sumUp").animate({
+								right: parseInt($(".sumUp").css('right'),10) == 0 ? $("#pt-main").css('width'):0
+						    }, 600, "easeOutQuad");
+						    $("#footer").animate({
+								right: parseInt($(".sumUp").css('right'),10) == 0 ? $("#pt-main").css('width'):'20%'
+						    }, 600, "easeOutQuad");
+							//.fadeOut(200, null)
+						}
+						$old = $(el.currentTarget).find('a').eq(0).text();
+	
 						$('#myNav li').removeClass('active');
 						$(el.currentTarget).addClass('active');
 						nextPage(1, $(el.currentTarget).attr("data-animation"));
@@ -150,6 +159,14 @@ function onLoadHandler(e)
 			$('#progressBar').width("0%");		
 			$('#progressBar').attr("aria-valuenow","0");
 			$(".sumUp div").empty();
+		}
+		else if(pageToGo == "1")
+		{
+			getTree(fillTree);
+		}
+		else if(pageToGo == "2")
+		{
+			getUsersTable(fillTable);
 		}
 
 		current = pageToGo;

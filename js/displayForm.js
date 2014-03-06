@@ -1,6 +1,7 @@
 function displayUserForm()
 {
 	//lancer le script PHP pour avoir la liste des users
+	$('.sumUp div').empty();
 	$('#progressBar').width("0%");		
 	$('#progressBar').attr("aria-valuenow","0");
 	$('#addForm').addClass('hide');
@@ -24,6 +25,10 @@ function populateUserList(data, textStatus, jqXHR)
 {
 	$("#loader").hide();
 	$('#selectPeople').removeClass("hide");
+	$('#step2').addClass('hide');
+	$('#step3').addClass('hide');
+	$('#step4').addClass('hide');
+	$('.sumUp div').empty();
 	//alert("proj");
 	$select = $('#myList');
 	if(textStatus == "success")
@@ -67,6 +72,10 @@ function createUser()
 	$('#progressBar').attr("aria-valuenow","0");
 	$('#selectPeople').addClass('hide');
 	$('#addForm').removeClass('hide');
+	$('#step2').addClass('hide');
+	$('#step3').addClass('hide');
+	$('#step4').addClass('hide');
+	$('.sumUp div').empty();
 	
 }
 
@@ -85,9 +94,4 @@ function createConfigFile(config)
 			  alert("error");
 			}
 		});
-}
-
-function modifyConfigFile(config)
-{
-
 }

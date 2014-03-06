@@ -296,3 +296,67 @@ td
 .navbar-inverse .navbar-nav>li>a {
   color: #FFF;
 }
+
+.pt-page-2 button
+{
+  width: 150px;
+}
+
+#tree
+{
+  width: 60%;
+  margin: 0 auto;
+}
+
+#tree input
+{
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#refreshTree
+{
+  float: left;
+  position: absolute;
+  left: 0px;
+}
+
+#loaderP2
+{
+  margin: 15% 30%;
+}
+
+#usersTable
+{
+  width: 600px;
+}
+
+#usersTable thead tr
+{
+  height: 75px;
+  border-style: solid;
+  background-color: rgb(255, 255, 255);
+}
+
+#usersTable td, th {
+  padding: 0 10px;
+  border-style: solid;
+  text-align: center;
+}
+
+#usersTable tr
+{
+  height: 75px;
+  border-style: solid;
+  background-color: rgb(233, 233, 233);
+}
+
+#usersTable tr:nth-child(even) 
+{
+  background-color: rgb(255, 255, 255);
+}
+#usersTable table
+{
+  margin: 20px auto;
+  width: 800px;
+}

@@ -26,7 +26,7 @@ function setRole(e)
 				butDanger.innerHTML = "Change Service";
 				butDanger.addEventListener('click',function(){
 					$(".alert").alert('close');
-					displayServicesList(getToken());
+					displayServicesList();
 					//getServicesListInConfig(data.config);
 				}, false);
 				p.appendChild(butDanger);
@@ -50,7 +50,7 @@ function setRole(e)
 			{
 				myAlert.className = "alert alert-dismissable alert-success fade";
 				myAlert.innerHTML += "<strong>Success</strong> Project add to user";
-				displayServicesList(getToken());
+				displayServicesList();
 			}
 			
 			myAlert.insertAdjacentHTML('afterBegin','<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>');

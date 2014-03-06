@@ -3,12 +3,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>adminSYG</title>
+      <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
       <link href="libs/css/bootstrap.min.css" rel="stylesheet">
           <!-- Bootstrap theme -->
       <link href="libs/css/bootstrap-theme.min.css" rel="stylesheet">
       <link href="css/theme.css" rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="css/component.css" />
       <link rel="stylesheet" type="text/css" href="css/animations.css" />
+      <link rel="stylesheet" href="libs/jstree/themes/default/style.min.css" />
      
   </head>
 
@@ -19,8 +21,8 @@
     <script type="text/javascript" src="libs/js/jquery.sortable.min.js"></script>
     <script type="text/javascript" src="libs/js/jquery-ui-1.10.4.custom.min.js"></script>
     <script type="text/javascript" src="libs/js/jquery-ui-1.10.4.custom.min effect.js"></script>
-   
     <script src="libs/js/modernizr.custom.js"></script>
+    <script src="libs/jstree/jstree.min.js"></script>
 
     <script type="text/javascript" src="libs/js/underscore.string.min.js"></script>                    
     <script type="text/javascript" src="js/loading.js"></script>
@@ -31,6 +33,10 @@
     <script type="text/javascript" src="js/servicesAndLayers.js"></script> 
     <script type="text/javascript" src="js/saveConfig.js"></script>  
     <script type="text/javascript" src="js/saveName.js"></script> 
+
+    <script type="text/javascript" src="js/getTree.js"></script> 
+    <script type="text/javascript" src="js/getUsersTable.js"></script>  
+
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
@@ -46,9 +52,10 @@
         <div id="myNav" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li data-animation="0" class="active"><a href="#">Nouvel Configuration</a></li>
-            <li data-animation="1"><a href="#">Toutes les configurations</a></li>
-            <li data-animation="2"><a href="#">Contact</a></li>
+            <li data-animation="1"><a href="#">Gérer les dossiers & configurations</a></li>
+            <li data-animation="2"><a href="#">Gérér les utilisateurs</a></li>
           </ul>
+
         </div><!--/.nav-collapse -->
       </div>
     </div>
@@ -282,10 +289,20 @@
         </div>
       </div>
 
-      <div class="pt-page pt-page-2"><h1><span>A collection of</span><strong>Page2</strong> Transitions</h1></div>
-      <div class="pt-page pt-page-3"><h1><span>A collection of</span><strong>Page3</strong> Transitions</h1></div>
-      <div class="pt-page pt-page-4"><h1><span>A collection of</span><strong>Page4</strong> Transitions</h1></div>
+      <div class="pt-page pt-page-2">
+        <!--button type="button" id="launchTree"  style="float:left;" class="btn btn-primary"><span class="glyphicon glyphicon-cog" style="margin-right: 10px; font-size: x-large; vertical-align: middle;"></span>Get all config</button-->
+        <img src='assets/images/ajax-loader-p2.gif' id='loaderP2' class='hide' alt='loading...' />
+        <div id="tree" class="hide">
+          <button type="button" id="refreshTree"  style="float:left;" class="btn btn-success"><span class="glyphicon glyphicon-refresh" style="margin-right: 10px; font-size: x-large; vertical-align: middle;"></span>Refresh tree</button>
+          <input type="text" value="" style="box-shadow:inset 0 0 4px #eee; padding:6px 12px; border-radius:4px; border:1px solid silver; font-size:1.1em;" id="demo_q" placeholder="Search">
+          <div id="jstree_demo_div"></div>
+        </div>
+      </div>
 
+      <div class="pt-page pt-page-3">
+        <div id="usersTable">
+        </div>
+      </div>
 
     </div>
 
@@ -301,6 +318,7 @@
             <span class="sr-only">0% Complete</span>
           </div>
         </div>
+
       </div>  
     </div>
 

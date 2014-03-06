@@ -126,7 +126,7 @@ function addUserInDB()
 		if($type_auth == 0)
 		{
 			$tsqlPWD = "INSERT INTO [usersSYG].[dbo].[pwd] (accountsID, pwd) VALUES (?,?); SELECT SCOPE_IDENTITY()";
-			$paramsPWD = array($data['id'], $pwd);
+			$paramsPWD = array($data['accountsID'], $pwd);
 			$ressourcePWD = sqlsrv_query($conn, $tsqlPWD, $paramsPWD);
 			if( $ressourcePWD === false ) {
 				die( print_r( sqlsrv_errors(), true));
@@ -139,6 +139,7 @@ function addUserInDB()
 				sqlsrv_fetch($ressourcePWD);
 				$data["message"] = "User registered";
 				$data["returnStatus"] = "200";
+
 			}
 			//echo json_encode(sqlsrv_get_field($ressource, 0)); 
 		}

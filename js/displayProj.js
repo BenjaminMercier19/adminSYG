@@ -16,8 +16,11 @@ function displayProj(data)
 	localStorage.setItem('mail', value.mail);
 	$('#progressBar').width("25%");		
 	$('#progressBar').attr("aria-valuenow","25");
+	$('.sumUp div').empty();
 
 	$('#step2').removeClass("hide");
+	$('#step3').addClass('hide');
+	$('#step4').addClass('hide');
 	$('.pt-page-current').animate({
         scrollTop: $("#step2").offset().top
     }, 600);	
@@ -34,6 +37,9 @@ function displayProjList()
 
 	$("#selectProj").removeClass("hide");
 	$(".createProj").addClass("hide");
+	$('#step3').addClass('hide');
+	$('#step4').addClass('hide');
+	$('.sumUp div').not(".User");
 	$.ajax({
 		type:"POST",
 		//data: {accountsID:localStorage.getItem("accountsID")},
@@ -87,6 +93,9 @@ function createProj()
 {
 	$("#selectProj").addClass("hide");
 	$(".createProj").removeClass("hide");
+	$('#step3').addClass('hide');
+	$('#step4').addClass('hide');
+	$('.sumUp div').not(".User");
 
 }
 
@@ -131,6 +140,12 @@ function saveProj()
 					$('.Project')[0].innerHTML = $html;
 					
 					$('#step3').removeClass("hide");
+					$('.pt-page-current').animate({
+				        scrollTop: $("#step3").offset().top
+				    }, 600);
+					$('.Role').empty();
+					$('.Config').empty();
+					$('#step4').addClass('hide');
 					
 				}
 
