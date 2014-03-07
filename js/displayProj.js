@@ -165,7 +165,7 @@ function saveProj()
 
 				myAlert.className += " in";
 
-				setTimeout(function(){myAlert.className.replace(/\bin\b/,''); myAlert.className+='out'; myAlert.parentNode.removeChild(myAlert)}, 3000);
+				setTimeout(function(){$(".alert").removeClass('in')}, 3000);
 
 			},
 			error: function(e){

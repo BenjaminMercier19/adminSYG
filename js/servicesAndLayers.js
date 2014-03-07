@@ -13,12 +13,12 @@ function getToken(callback)
 			{
 				localStorage.setItem("token", data.token);
 				token = data.token;
-				alert(token);
 				callback(null, token);
 				//return token;
 			},
 			error: function()
-			{alert("Impossible to connect the ArcGIS Server");
+			{
+				alert("Impossible to connect the ArcGIS Server");
 				callback("Impossible to connect the ArcGIS Server", null);
 				//return false;
 			}
@@ -81,9 +81,6 @@ function displayServicesList()
 			alert(err);
 		}
 	});
-
-	
-
 }
 
 function getLayerList(value)

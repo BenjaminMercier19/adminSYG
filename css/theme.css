@@ -15,7 +15,7 @@ html
   z-index: 1000;
   position: absolute;
   bottom: 0;
-  width: 30%;
+  width: 60%;
   margin-left: 20%;
   margin-right: 20%;
 }
@@ -162,6 +162,11 @@ html
   -ms-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
+}
+
+.sumUp :not(h2) span
+{
+  margin: 10px 0;
 }
 
 
@@ -326,10 +331,10 @@ td
   margin: 15% 30%;
 }
 
-#usersTable
+/*#usersTable
 {
   width: 600px;
-}
+}*/
 
 #usersTable thead tr
 {

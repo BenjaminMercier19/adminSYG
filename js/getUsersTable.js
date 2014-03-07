@@ -95,19 +95,22 @@ function fillTable(err, data)
 
 function deleteUsersRow(e)
 {
-	$tr = $(e.currentTarget.parentNode.parentNode);
-	if(e.currentTarget.id.split("roleID").length > 1)
+	if(confirm("Voulez vous vraiment supprimer cette ligne?"))
 	{
-		deleteConfig(e.currentTarget.id.split("roleID")[1], $tr, refreshTable);
-		//alert("roleID");
-	}
-	else if(e.currentTarget.id.split("ProjAccID").length > 1)
-	{
-		alert("ProjAccID");
-	}
-	else if(e.currentTarget.id.split("accountsID").length > 1)
-	{
-		deleteUser(refreshTable, e.currentTarget.id.split("accountsID")[1], $tr);
+		$tr = $(e.currentTarget.parentNode.parentNode);
+		if(e.currentTarget.id.split("roleID").length > 1)
+		{
+			deleteConfig(e.currentTarget.id.split("roleID")[1], $tr, refreshTable);
+			//alert("roleID");
+		}
+		else if(e.currentTarget.id.split("ProjAccID").length > 1)
+		{
+			deleteProj(refreshTable, e.currentTarget.id.split("ProjAccID")[1], $tr);
+		}
+		else if(e.currentTarget.id.split("accountsID").length > 1)
+		{
+			deleteUser(refreshTable, e.currentTarget.id.split("accountsID")[1], $tr);
+		}
 	}
 	
 }
@@ -127,12 +130,55 @@ function deleteConfig(roleID, tr, callback)
 		error: function(e)
 		{
 			callback(e, null);
-			alert("Impossible to get the directories" );
+			alert("Impossible to delete this config" );
 			//callback("Impossible to connect the ArcGIS Server", null);
 			//return false;
 		}
 	});
 }
+
+function deleteUser(callback, accID, tr)
+{
+	$.ajax({
+			type:"POST",
+			data:{accID: accID},
+			dataType:"json",
+			url: "php/deleteUser.php",
+			success: function(data)
+			{
+				callback(null, data, tr);
+				//$('#jstree_demo_div').jstree().refresh();		//return token;
+			},
+			error: function(e)
+			{
+				callback(e, null, null);
+				alert("Impossible to get the directories" );
+			}
+		});
+}
+
+function deleteProj(callback, projAccID, tr)
+{
+		$.ajax({
+		type:"POST",
+		data:{projAccID: projAccID},
+		dataType:"json",
+		url: "php/deleteProj.php",
+		success: function(data)
+		{
+			callback(null, data, tr);
+			//$('#jstree_demo_div').jstree().refresh();		//return token;
+		},
+		error: function(e)
+		{
+			callback(e, null);
+			alert("Impossible to delete this config" );
+			//callback("Impossible to connect the ArcGIS Server", null);
+			//return false;
+		}
+	});
+}
+
 
 function refreshTable(err, data, tr)
 {
@@ -140,7 +186,7 @@ function refreshTable(err, data, tr)
 	{
 		if(data.success)
 		{
-			if(data.statement == "config")
+			if(data.statement == "config" || data.statement == "proj")
 			{
 				if(tr)
 				{	
@@ -159,8 +205,22 @@ function refreshTable(err, data, tr)
 			        	}
 			        	else if($(this).children().length == 8)
 			        	{
-			        		$accID= $(this).find("td.hide").eq(0).text();
-			        		deleteUser(refreshTable, $accID, $(this));
+			        		if(!$(this).children()[0].rowSpan || $(this).children()[0].rowSpan == 1)
+			        		{	
+			        			$accID= $(this).find("td.hide").eq(0).text();
+			        			deleteUser(refreshTable, $accID, $(this));
+			        		}
+			        		else
+			        		{
+			        			$(this).children()[0].rowSpan --;
+			        	    	$(this).children()[1].rowSpan --;
+			        			var chil = [$(this).children()[0],$(this).children()[1]];
+			        			$sib = $(this).next();
+			        			$sib.prepend(chil[1]);
+			        			$sib.prepend(chil[0]);
+
+			        		}
+
 			        	}
 			        	
 			        });
@@ -186,22 +246,3 @@ function refreshTable(err, data, tr)
 	}
 }
 
-function deleteUser(callback, accID, tr)
-{
-	$.ajax({
-			type:"POST",
-			data:{accID: accID},
-			dataType:"json",
-			url: "php/deleteUser.php",
-			success: function(data)
-			{
-				callback(null, data, tr);
-				//$('#jstree_demo_div').jstree().refresh();		//return token;
-			},
-			error: function(e)
-			{
-				callback(e, null, null);
-				alert("Impossible to get the directories" );
-			}
-		});
-}

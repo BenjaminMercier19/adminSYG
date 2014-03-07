@@ -49,7 +49,7 @@ function setRole(e)
 			else
 			{
 				myAlert.className = "alert alert-dismissable alert-success fade";
-				myAlert.innerHTML += "<strong>Success</strong> Project add to user";
+				myAlert.innerHTML += "<strong>Success</strong> Role added, a config file is prepared !!";
 				displayServicesList();
 			}
 			
@@ -67,6 +67,8 @@ function setRole(e)
 					//myAlert.parentNode.removeChild(myAlert)
 				}, 
 				3000);*/
+
+			setTimeout(function(){$(".alert.alert-success").removeClass('in')}, 3000);
 
 			$('#progressBar').width("50%");		
 			$('#progressBar').attr("aria-valuenow","50");

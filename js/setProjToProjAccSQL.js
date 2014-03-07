@@ -43,7 +43,9 @@ function saveInProjAcc(id, value)
 
 			myAlert.className += " in";
 
-			setTimeout(function(){myAlert.className.replace(/\bin\b/,''); myAlert.className+='out'; myAlert.parentNode.removeChild(myAlert)}, 3000);
+			setTimeout(function(){$(".alert").removeClass('in')}, 3000);
+
+				//myAlert.parentNode.removeChild(myAlert)}, 3000);
 			
 			$html = '<span class="glyphicon glyphicon-road"></span>';
 			$html +='<span>' + value + '</span>';

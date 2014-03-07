@@ -1,17 +1,17 @@
 function getTree(callback)
 {
-	$("#loaderP2").removeClass("hide");
-	$("#tree").addClass("hide");
+	$('#loaderP2').removeClass('hide');
+	$('#tree').addClass('hide');
 	$.ajax({
-		type:"POST",
-		dataType:"json",
-		url: "php/createJSTree.php",
+		type:'POST',
+		dataType:'json',
+		url: 'php/createJSTree.php',
 		success: function(data)
 		{
-			$("#tree").removeClass("hide");
-			$("#loaderP2").addClass("hide");
-			$.jstree.defaults.core.themes.variant = "stripes";
-			//alert("test");
+			$('#tree').removeClass('hide');
+			$('#loaderP2').addClass('hide');
+			$.jstree.defaults.core.themes.variant = 'stripes';
+			//alert('test');
 			var to = false;
 			$('#demo_q').keyup(function () {
 				if(to) { clearTimeout(to); }
@@ -27,8 +27,8 @@ function getTree(callback)
 		error: function(e)
 		{
 			callback(null, e);
-			alert("Impossible to get the directories" );
-			//callback("Impossible to connect the ArcGIS Server", null);
+			alert('Impossible to get the directories' );
+			//callback('Impossible to connect the ArcGIS Server', null);
 			//return false;
 		}
 	});
@@ -43,41 +43,78 @@ function fillTree(data,err)
 			'core' : 
 			{
 				'data' : data,
-				"themes" : { "stripes" : true },
+				'themes' : { 'stripes' : true },
+				'check_callback':true
 			},
-			"plugins" : [ "search", "contextmenu" ],
+			'plugins' : [ 'search', 'contextmenu'],
 			'search' : { 'fuzzy' : false },
-            "contextmenu" : {
+            'contextmenu' : {
 				items : function(node){
             		if(node.original.type)
             		{
             			return {
-                			"Open" : {
-                            	"action" : function(nodebis) {
+                			'Open' : {
+                            	'action' : function(nodebis) {
                             		var url = node.a_attr.href;
                             		var win=window.open(url, '_blank');
 									win.focus();
 								},
-                               	"label": "Open"
+                               	'label': 'Open'
+                        	},
+                        	'Delete' : {
+                        		'action':  function (data) {
+                    						var inst = $.jstree.reference(data.reference), obj = inst.get_node(data.reference);
+											if(inst.is_selected(obj)) {
+												inst.delete_node(inst.get_selected());
+											}
+											else {
+												inst.delete_node(obj);
+											}
+					                    },
+                        		'label': 'Delete'
                         	}
                     	};
             		}
             		else
             		{
             			return {
-                			"Open" : {
-                				"_disabled" : true,
-                				"label":"Open"
-                			}
+                			'Open' : {
+                				'_disabled' : true,
+                				'label':'Open'
+                			},
+							'Delete' : {
+                        		'action':  function (data) {
+                    						var inst = $.jstree.reference(data.reference), obj = inst.get_node(data.reference);
+											if(inst.is_selected(obj)) {
+												inst.delete_node(inst.get_selected());
+											}
+											else {
+												inst.delete_node(obj);
+											}
+					                    },
+                        		'label': 'Delete'
+                        	}
 
             			};
             		}
 				}
             }  
+		}).bind("delete_node.jstree", function (e, data) { 
+			if(!confirm("Are you sure you want to delete?")) { 
+			    e.stopImmediatePropagation(); 
+			    e.preventDefault();
+			    e = false;
+			    return false; 
+			  }
+			  else 
+			  {
+			  	removeDir(data.node);
+			  } 
 		});
 
 	}
 }
+
 function refreshTree(data, err)
 {
 	if(!err)
@@ -86,4 +123,43 @@ function refreshTree(data, err)
 		fillTree(data,err);
 	}
 	
+}
+
+function removeDir(dir)
+{
+	var rmdir;
+	if(dir.a_attr.href != "#")
+	{
+		rmdir = dir.a_attr.href.split('info/')[1];
+	}
+	else 
+	{
+		if(dir.parents.length == 1)
+		{
+			rmdir = 'config/'+dir.text;
+		}
+		else if (dir.parents.length == 2)
+		{
+			rmdir = 'config/'+$("#jstree_demo_div").jstree("get_text", $("#jstree_demo_div").jstree("get_parent", dir))+"/"+dir.text;
+		}
+	}
+	$.ajax({
+		type:'POST',
+		data:{rmdir: rmdir},
+		dataType:'json',
+		url: 'php/removeDir.php',
+		success: function(data)
+		{
+			alert('Directory removed');
+			//callback(null, data, dir);
+			//$('#jstree_demo_div').jstree().refresh();		//return token;
+		},
+		error: function(e)
+		{
+			//callback(e, null);
+			alert('Impossible to get the directory' );
+			//callback('Impossible to connect the ArcGIS Server', null);
+			//return false;
+		}
+	});
 }
