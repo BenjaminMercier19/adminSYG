@@ -55,8 +55,8 @@ Avec un click droit sur l'arbre il est possible de supprimer le noeud sélection
 
 Le dernier onglet permet d'afficher une table qui contient l'ensemble des informations d'un utilisateur relatives à ses projets.
 
-Nom de l'utilisateur | Projet(s) | Rôle sur le projet | Le fichier de config xml associé | Un bouton pour supprimer la ligne
-_____________________|___________|____________________|__________________________________|__________________________________
+Utilisateur | Projet(s) | Rôle | Le fichier de config xml associé | Un bouton pour supprimer la ligne
+____________|___________|______|__________________________________|__________________________________
 
 Si un utilisateur à plusieurs projets le bouton Delete ne supprime que le projet + config de la ligne en question. Si l'utilisateur n'a qu'un projet cela supprime aussi l'utilisateur
 
