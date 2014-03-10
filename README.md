@@ -1,8 +1,6 @@
 # AdminTerraGIS
 
-Ici se trouve le code source de l'application d'administration des applications SYG ! 
-
-[Voir le site ici](https://sygdev.systra.info/adminSYG)
+Ici se trouve le code source de l'application d'administration des applications SYG ! [Voir le site ici](https://sygdev.systra.info/adminSYG)
 
 ## Généralités
 * C'est une application qui permet de gérer la partie administrative des projets SYG (excepté la création de web services cartographiques)
@@ -29,7 +27,7 @@ La création d'une nouvelle configuration se passe en 4 partie:
 	ii.	 Dans la liste 'Layers List' se trouve les couches à déplacer dans les champs 'Hole in edition' et 'Hole Validated'. Il suffit de faire un 'cliquer-glisser' pour mettre la couche dans le champs associé. Pour s'informer sur la couche il est possible de cliquer dessus afin de l'ouvrir dans l'API Rest d'ArcGIS Server.
 	iii. Le reste des champs permettent de mettre un titre à notre application, un sous-titre voire plus si l'on est dans le cas d'un prestataire. On rajoute aussi le nom du responsable (validateur de SYSTRA) et son mail afin de pouvoir le contacter automatiquement lors du remplissage dans l'appli SYG.
 
-	Attention: Ne pas oublier de cliquer sur enregistrer à la fin !!!			
+	** Attention: Ne pas oublier de cliquer sur enregistrer à la fin !!!	**		
 
 
 Un tableau de résumer permet de mettre en avant les choix effectués pour la configuration.
