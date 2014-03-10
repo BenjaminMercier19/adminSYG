@@ -79,7 +79,7 @@ function onLoadHandler(e)
 
 	var $main = $( '#pt-main' ),
 		$pages = $main.children( 'div.pt-page' ),
-		$old = "Nouvel Configuration",
+		$old = "Nouvelle Configuration",
 		animcursor = 1,
 		pagesCount = $pages.length,
 		current = 0,
@@ -112,7 +112,7 @@ function onLoadHandler(e)
 					el.preventDefault();
 					if(!$(el.currentTarget).hasClass("active"))
 					{
-						if(($(el.currentTarget).find('a').eq(0).text() == "Nouvel Configuration") || $old == "Nouvel Configuration")
+						if(($(el.currentTarget).find('a').eq(0).text() == "Nouvelle Configuration") || $old == "Nouvelle Configuration")
 						{
 							$(".sumUp").animate({
 								right: parseInt($(".sumUp").css('right'),10) == 0 ? $("#pt-main").css('width'):0
