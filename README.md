@@ -33,15 +33,15 @@ La création d'une nouvelle configuration se passe en 4 partie:
 Un tableau de résumer permet de mettre en avant les choix effectués pour la configuration.
 
 Le fichier xml ainsi créer aura un nom normalisé: https://sygdev.systra.info/config/NomDuProjet/NomDuRole/config_LoginUser_Role_Projet.xml ce qui veut dire que sur le web serveur IIS134 se trouve un dossier nommé config qui est hiérarchisé comme cet exemple:
-	* Projet
-		- Rôle
-			- fichier xml de configuration
-			- fichier xml de configuration
-		- Rôle
-			1. fichier xml de configuration
-	* Projet
-		- Rôle
-			1. fichier xml de configuration
+* Projet
+- Rôle
+1. fichier xml de configuration
+2. fichier xml de configuration
+- Rôle
+1. fichier xml de configuration
+* Projet
+- Rôle
+1. fichier xml de configuration
 
 
 ## Gérer les dossiers & configurations
