@@ -23,25 +23,25 @@ La création d'une nouvelle configuration se passe en 4 partie:
 	* On choisit parmis la liste déroulante des projets existants
 3. Choix du rôle, associe un rôle à l'utilisateur choisit sur le projet choisit. Il n'y a que 3 rôles disponibles: Client, Prestataire ou Validateur
 4. Choix des services ou remplissage du fichier de configuration:
-	i.	 On doit choisir dans la liste déroulante 'Services List' le web service dans lequel sont publiées les tables correspondantes à la configuration choisit.
-	ii.	 Dans la liste 'Layers List' se trouve les couches à déplacer dans les champs 'Hole in edition' et 'Hole Validated'. Il suffit de faire un 'cliquer-glisser' pour mettre la couche dans le champs associé. Pour s'informer sur la couche il est possible de cliquer dessus afin de l'ouvrir dans l'API Rest d'ArcGIS Server.
-	iii. Le reste des champs permettent de mettre un titre à notre application, un sous-titre voire plus si l'on est dans le cas d'un prestataire. On rajoute aussi le nom du responsable (validateur de SYSTRA) et son mail afin de pouvoir le contacter automatiquement lors du remplissage dans l'appli SYG.
+	- i.	 On doit choisir dans la liste déroulante 'Services List' le web service dans lequel sont publiées les tables correspondantes à la configuration choisit.
+	- ii.	 Dans la liste 'Layers List' se trouve les couches à déplacer dans les champs 'Hole in edition' et 'Hole Validated'. Il suffit de faire un 'cliquer-glisser' pour mettre la couche dans le champs associé. Pour s'informer sur la couche il est possible de cliquer dessus afin de l'ouvrir dans l'API Rest d'ArcGIS Server.
+	- iii. Le reste des champs permettent de mettre un titre à notre application, un sous-titre voire plus si l'on est dans le cas d'un prestataire. On rajoute aussi le nom du responsable (validateur de SYSTRA) et son mail afin de pouvoir le contacter automatiquement lors du remplissage dans l'appli SYG.
 
-	** Attention: Ne pas oublier de cliquer sur enregistrer à la fin !!!	**		
+	**Attention: Ne pas oublier de cliquer sur enregistrer à la fin !!!**		
 
 
 Un tableau de résumer permet de mettre en avant les choix effectués pour la configuration.
 
 Le fichier xml ainsi créer aura un nom normalisé: https://sygdev.systra.info/config/NomDuProjet/NomDuRole/config_LoginUser_Role_Projet.xml ce qui veut dire que sur le web serveur IIS134 se trouve un dossier nommé config qui est hiérarchisé comme cet exemple:
-	-> projet
-		-> Rôle
-			-> fichier xml de configuration
-			-> fichier xml de configuration
-		-> Rôle
-			-> fichier xml de configuration
-	-> projet
-		-> Rôle
-			-> fichier xml de configuration
+	* Projet
+		- Rôle
+			- fichier xml de configuration
+			- fichier xml de configuration
+		- Rôle
+			1. fichier xml de configuration
+	* Projet
+		- Rôle
+			1. fichier xml de configuration
 
 
 ## Gérer les dossiers & configurations
