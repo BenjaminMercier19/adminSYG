@@ -16,8 +16,8 @@ La création d'une nouvelle configuration se passe en 4 partie:
 1. L'utilisateur:
 	* Choisir un utilisateur existant permet d'ouvrir la liste des utilisateurs présents dans la base de données
 	* Ajouter un nouvel utilisateur permet d'en créer une dans la BDD. Cela ouvre un formulaire avec 2 choix possibles:
-		i.	Cette personne ne fait pas partie de SYSTRA (client ou prestataire). On doit remplir l'ensemble des champs du formulaire
-		ii. Cette personne à un compte windows chez SYSTRA. Ainsi on ne rentre que son login (première lettre prénom + nom de famille). Attention aux noms composés. Le reste des informations comme le nom, prénom et mail seront récupérés à l'aide de l'annuaire d'entreprise
+		- i.	Cette personne ne fait pas partie de SYSTRA (client ou prestataire). On doit remplir l'ensemble des champs du formulaire
+		- ii. Cette personne à un compte windows chez SYSTRA. Ainsi on ne rentre que son login (première lettre prénom + nom de famille). Attention aux noms composés. Le reste des informations comme le nom, prénom et mail seront récupérés à l'aide de l'annuaire d'entreprise
 2. Le projet:
 	* Créer un nouveau projet permet d'en rajouter un dans la BDD. On doit donner un nom au projet, nom qui sera disponible dans la liste déroulante ors de l'authentification à la plateforme SYG.
 	* On choisit parmis la liste déroulante des projets existants
