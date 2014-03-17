@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="libs/css/bootstrap.min.css">
+	<meta http-equiv="content-type" 
+		content="text/html;charset=utf-8" />
+	<title>Help</title>
+	<style>
+		::selection {color:rgb(255,255,255);background:rgb(227,88,88);}
+:		:-moz-selection {color:rgb(255,255,255);background:rgb(227,88,88);}
+</style>
+</head>
+<body style="width: 65%;
+			background-color: #fff;
+			border: 1px solid #CACACA;
+			padding: 30px;
+			margin: auto;">
+	<h1 class="page-header"><span class="glyphicon glyphicon-question-sign"></span>AdminTerraGIS</h1>
+	<p>Ici se trouve le code source de l'application d'administration des applications SYG ! 
+		<a href="https://sygdev.systra.info/adminSYG">Voir le site ici</a>
+	</p>
+	<h2 class="page-header">Généralités</h2>
+	<ul>
+		<li>C'est une application qui permet de gérer la partie administrative des projets SYG (excepté la création de web services cartographiques)</li>
+		<li>Création d'une nouvelle configuration</li>
+		<li>Visualisation / Modification de la hiérarchie des projets existants</li>
+		<li>Gestion des utilisateurs associés à l'application</li>
+	</ul>
+	<h2 class="page-header">Nouvelle Configuration</h2>
+	<p>Le premier onglet permet de mettre en place une nouvelle configuration et d'intégrer les résultats dans la base de données usersSYG. Cette base de données stock l'ensemble des informations relatives à l'utilisation de la plateforme SYG depuis les utilisateurs jusqu'aux projets, rôles et configurations. La création d'une nouvelle configuration se passe en 4 partie:</p>
+	<ol style="list-style-type: decimal">
+		<li>L'utilisateur:
+			<ul>
+				<li>Choisir un utilisateur existant permet d'ouvrir la liste des utilisateurs présents dans la base de données</li>
+				<li>Ajouter un nouvel utilisateur permet d'en créer une dans la BDD. Cela ouvre un formulaire avec 2 choix possibles:
+					<ol style="list-style-type: lower-roman">
+						<li>Cette personne ne fait pas partie de SYSTRA (client ou prestataire). On doit remplir l&#39;ensemble des champs du formulaire</li>
+						<li>Cette personne à un compte windows chez SYSTRA. Ainsi on ne rentre que son login (première lettre prénom + nom de famille). Attention aux noms composés. Le reste des informations comme le nom, prénom et mail seront récupérés à l'aide de l'annuaire d'entreprise</li>
+					</ol>
+				</li>
+			</ul>
+		</li>
+		<li>Le projet:         
+			<ul>
+				<li>Créer un nouveau projet permet d'en rajouter un dans la BDD. On doit donner un nom au projet, nom qui sera disponible dans la liste déroulante ors de l'authentification à la plateforme SYG.</li>
+				<li>On choisit parmis la liste déroulante des projets existants</li>
+			</ul>
+		</li>
+		<li>Choix du rôle, associe un rôle à l'utilisateur choisit sur le projet choisit. Il n'y a que 3 rôles disponibles: Client, Prestataire ou Validateur</li>
+		<li>Choix des services ou remplissage du fichier de configuration:
+			<ol style="list-style-type: lower-roman">
+				<li>On doit choisir dans la liste déroulante &#39;Services List&#39; le web service dans lequel sont publiées les tables correspondantes à la configuration choisit.</li>
+				<li>Dans la liste &#39;Layers List&#39; se trouve les couches à déplacer dans les champs &#39;Hole in edition&#39; et &#39;Hole Validated&#39;. Il suffit de faire un &#39;cliquer-glisser&#39; pour mettre la couche dans le champs associé. Pour s&#39;informer sur la couche il est possible de cliquer dessus afin de l&#39;ouvrir dans l&#39;API Rest d&#39;ArcGIS Server.</li>
+				<li>Le reste des champs permettent de mettre un titre à notre application, un sous-titre voire plus si l'on est dans le cas d'un prestataire. On rajoute aussi le nom du responsable (validateur de SYSTRA) et son mail afin de pouvoir le contacter automatiquement lors du remplissage dans l'appli SYG.</li>
+			</ol>
+			<strong>Attention: Ne pas oublier de cliquer sur enregistrer à la fin !!!</strong>
+		</li>
+	</ol>
+
+	<p>Un tableau de résumer permet de mettre en avant les choix effectués pour la configuration.</p>
+	<p>Le fichier xml ainsi créer aura un nom normalisé: https://sygdev.systra.info/config/NomDuProjet/NomDuRole/config_LoginUser_Role_Projet.xml ce qui veut dire que sur le web serveur IIS134 se trouve un dossier nommé config qui est hiérarchisé comme cet exemple: 
+		<ol>
+			<li>Projet
+				<ul>
+					<li>Rôle
+						<ol style="list-style-type: lower-roman">
+							<li>fichier xml de configuration</li>
+							<li>fichier xml de configuration</li>
+						</ol>
+					</li>
+					<li>Rôle
+						<ol style="list-style-type: lower-roman">
+							<li>fichier xml de configuration</li>
+						</ol>
+					</li>
+				</ul>
+			</li>
+			<li>Projet
+				<ul>
+					<li>Rôle
+						<ol style="list-style-type: lower-roman">
+							<li>fichier xml de configuration</li>
+						</ol>
+					</li>
+				</ul>
+			</li>
+		</ol>
+	 </p>
+	<h2 class="page-header">Gérer les dossiers &amp; configurations</h2>
+	<p>Le 2ème onglet permet de visualiser la hiérarchie du dossier 'config' contenant l'ensemble des fichiers de configuration. Avec un click droit sur l'arbre il est possible de supprimer le noeud sélectionner et ses enfants, ou alors ouvrir le fichier si le noeud sélectionner est un fichier.xml. Il y a aussi une barre de recherche, on peut ainsi taper le login d'un user pour voir dans quel projets il évolue</p>
+	<h2 id="gérer-les-utilisateurs">Gérer les utilisateurs</h2>
+	<p>Le dernier onglet permet d'afficher une table qui contient l'ensemble des informations d'un utilisateur relatives à ses projets.</p>
+	<p>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Utilisateur</th>
+					<th>Projet(s)</th> 
+					<th>Rôle</th>
+					<th>Le fichier de config xml associé</th>
+					<th>Un bouton pour supprimer la ligne</th>
+				</tr>
+			</thead>
+		</table>
+	</p>
+	<p>Si un utilisateur à plusieurs projets le bouton Delete ne supprime que le projet + config de la ligne en question. Si l'utilisateur n'a qu'un projet cela supprime aussi l'utilisateur</p>
+	<h2 class="page-header">Améliorations</h2>
+	<ul>
+		<li>Il est possible d'envoyer un mail automatique pour prévenir l'utilisateur qu'il est associé à une nouvelle configuration</li>
+	</ul>
+	<h2 class="page-header">Développement</h2>
+	<ul>
+		<li><a href="http://jquery.com">Développement Front en Javascript &amp; framework JQuery version 1.10.4</a></li>
+		<li><a href="http://getbootstrap.com/">Design avec l'API twitter bootstrap v3</a></li>
+		<li><a href="http://www.php.net/manual/fr/book.sqlsrv.php">Back-end en PHP5 et le plugin sqlsrv</a></li>
+		<li><a href="http://www.microsoft.com/france/serveur-cloud/sql/2012/">Persistance des données sur SQLServer 2012</a></li>
+	</ul>
+</body>
