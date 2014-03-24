@@ -15,7 +15,7 @@ if ( sqlsrv_begin_transaction( $conn ) === false ) {
 $accID = $_POST['accID'];
 
 /* Exécute la première requête. */
-$sql1 = "DELETE Pwd FROM [dbo].[pwd] as Pwd INNER JOIN [dbo].[accounts] as A ON Pwd.accountsID = A.accountsID WHERE A.accountsID = ?";
+$sql1 = "DELETE Pwd FROM [dbo].[pwd] as Pwd WHERE Pwd.accountsID = ?";
 $params = array( $accID );
 $stmt1 = sqlsrv_query( $conn, $sql1, $params );
 
@@ -30,7 +30,7 @@ if( $stmt1 && $stmt2 ) {
      echo json_encode(array("success" => "Transaction validée", "statement" => "user"));
 } else {
      sqlsrv_rollback( $conn );
-     echo json_encode(array("err"=>"Transaction annulée"));
+     echo json_encode(array("err"=>"Transaction annulée, veuillez vérifier la requête manuellement dans le SQL133. Pour info, l'accountsID est: ".$accID));
 }
 
 ?>

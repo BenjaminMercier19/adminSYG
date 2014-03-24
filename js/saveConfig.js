@@ -37,8 +37,7 @@ function saveConfig()
 			subTitle: $("#subTitleConfig").val(),
 			respoName: ($('.Role span').eq(1).text() == "Prestataire")? $("#respoName").val() : null,
 			responMail: ($('.Role span').eq(1).text() == "Prestataire")? $("#inputError2").val():null,
-			standard: $("#selectbasic").val(),
-			//TODO: Rajouterle select GrainAnalysis
+			standard: $("#selectbasic").val()
 		};
 
 		$.ajax({
@@ -48,9 +47,10 @@ function saveConfig()
 			url:"php/saveConfig.php",
 			success: function(data,textStatus,jqXHR)
 			{
-				alert("success");
+				alert(data.message);
 				$('#progressBar').width("100%");		
 				$('#progressBar').attr("aria-valuenow","100");
+
 			},
 			error: function(e){
 			   //if there is an error append a 'none available' option

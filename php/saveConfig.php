@@ -149,34 +149,11 @@
 		}
 		
 		$xml->save($filename);
+		echo json_encode(array("returnStatus" => 200, "message" => "Project is well configured, send a mail to the user"));
 	}
 	//Cas où le fichier n'extiste pas 
 	else 
 	{
 	    echo "Le fichier $filename n'existe pas.";
 	}
-
-	/*function createLayers($xml)
-	{
-		$newLayer = $xml -> createElement("layer");
-		$newLayer -> setAttribute("id", "HoleInEdition");
-		$newLayer -> setAttribute("label", "HoleInEdition");
-		$newLayer -> setAttribute("type", "feature");
-		$newLayer -> setAttribute("visible", "true");
-		$newLayer -> setAttribute("alpha", "1.0");
-		$newLayer -> setAttribute("popupconfig", "popups/PopUp_Hole.xml");
-		$newLayer -> setAttribute("url", $holeEdit);
-		
-		$newLayerBis = $xml -> createElement("layer");
-		$newLayerBis -> setAttribute("id", "HoleValidated");
-		$newLayerBis -> setAttribute("label", "HoleValidated");
-		$newLayerBis -> setAttribute("type", "feature");
-		$newLayerBis -> setAttribute("visible", "true");
-		$newLayerBis -> setAttribute("alpha", "1.0");
-		$newLayerBis -> setAttribute("popupconfig", "popups/PopUp_Hole.xml");
-		$newLayerBis -> setAttribute("url", $holeValid);
-
-		$xml -> getElementsByTagName('operationallayers') -> item(0) -> appendChild($newLayer);
-		$xml -> getElementsByTagName('operationallayers') -> item(0) -> appendChild($newLayerBis);
-	}*/
 ?>
